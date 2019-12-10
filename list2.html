@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>www.jb51.net JS抽奖转盘</title>
+  <style>
+  *{
+    margin:0;
+    padding:0;
+    list-style: none;
+  }
+    .big{
+      width: 318px;
+      height: 318px;
+      margin:100px auto;
+    }
+    .big>div{
+      width: 100px;
+      height: 100px;
+      background: pink;
+      float: left;
+      line-height: 100px;
+      text-align: center;
+      border: solid;
+    }
+    .big>div:nth-of-type(5){
+      background: yellow;
+      cursor: pointer;
+    }
+    #act{
+      background: red;
+    }
+  </style>
+</head>
+<body>
+<div class="big">
+  <div class="small" id="act">1</div>
+  <div class="small">2</div>
+  <div class="small">3</div>
+  <div class="small">8</div>
+  <div id="cj">点击抽奖</div>
+  <div class="small">4</div>
+  <div class="small">7</div>
+  <div class="small">6</div>
+  <div class="small">5</div>
+</div>
+<script>
+  var arrDiv=document.getElementsByClassName("small");
+  var oCj=document.getElementById("cj");
+  var num=0;
+  var shijian=Math.random()*5000+3200;
+  oCj.onclick=function(){
+    oTime=setInterval(dianji,200);
+  }
+  function dianji() {
+    num=num+1;
+    if (num>arrDiv.length-1){
+      num=0
+    }
+    for(j=0;j<arrDiv.length;j++){
+      arrDiv[j].id="";
+    }
+    arrDiv[num].id="act";
+    setTimeout(tingzhi,shijian);
+    function tingzhi() {
+      clearInterval(oTime)
+    }
+   }
+</script>
+</body>
+</html>

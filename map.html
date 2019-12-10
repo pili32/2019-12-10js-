@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+</body>
+<script>
+    //map()的使用方法
+    //数组接受三个参数
+        //当前的值
+        //当前下标
+        //数组对象本身
+    //Array.map() 方法返回一个新数组，数组中的元素为原始数组元素调用函数处理后的值，同时不会改变原来的数组。
+    //map()里面必须加上return 返回
+    const arr = ["仗义","王五","李四","魁梧"]
+    arr.map(function(item,index){
+        return item
+    })
+    console.log(arr)  
+</script>
+</html>

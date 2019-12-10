@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="setting()" id="btn1"> 开始</button>
+    <span id="span1">0</span>
+    <button onclick="inter()" id="btn2">结束</button>
+
+</body>
+<script>
+    var num = 0
+    var time
+    document.getElementById("btn2").setAttribute("disabled", true)
+
+    function setting() {
+        time = setInterval(() => { //开始计时
+            document.getElementById("btn1").setAttribute("disabled", true)
+            document.getElementById("btn2").removeAttribute("disabled")
+            var span1 = document.getElementById("span1")
+            span1.innerHTML = num
+            if( span1.innerHTML ==100){ 
+                inter() //结束计时
+            }
+            num++
+        }, 100);
+    }
+    function inter() { //结束计时
+        document.getElementById("btn1").removeAttribute("disabled")
+        document.getElementById("btn2").setAttribute("disabled", true)
+        clearTimeout(time)
+    }
+</script>
+
+</html>

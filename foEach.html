@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+    //语法 arr.forEach(function(currentVlaue,index,this.value))
+    //currentVlaue  表示当前值
+    //index 表示当前下标
+    //this.value 表示当前的数组
+    var arr = ["张三","李四","王五","老六","宋七","六八"]
+   arr.forEach(function(item,index,list){
+    console.log(item)
+    console.log(index+"$")
+    console.log(list+"%")
+    // foEach.html:52 张三
+    // foEach.html:53 0$
+    // foEach.html:54 张三,李四,王五,老六,宋七,六八%
+    // foEach.html:52 李四
+    // foEach.html:53 1$
+    // foEach.html:54 张三,李四,王五,老六,宋七,六八%
+    // foEach.html:52 王五
+    // foEach.html:53 2$
+    // foEach.html:54 张三,李四,王五,老六,宋七,六八%
+    // foEach.html:52 老六
+    // foEach.html:53 3$
+    // foEach.html:54 张三,李四,王五,老六,宋七,六八%
+    // foEach.html:52 宋七
+    // foEach.html:53 4$
+    // foEach.html:54 张三,李四,王五,老六,宋七,六八%
+    // foEach.html:52 六八
+    // foEach.html:53 5$
+    // foEach.html:54 张三,李四,王五,老六,宋七,六八%
+   })
+
+
+   const item =[1,2,3,4,5]
+   const list =[]
+
+   for(var i=0;i<item.length;i++){
+       list.push(item[i])
+       console.log(list)
+   }
+   const arrList =[1,2,3,4,5]
+   const num=[]
+   arrList.forEach((item,index,list)=>{
+    num.push(index)
+    console.log(num)
+   })
+</script>
+</html>

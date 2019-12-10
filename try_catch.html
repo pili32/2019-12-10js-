@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>请输出一个5到10的数字</p>
+    <input type="text" id="demo">
+    <button onclick="myFunction()">查询</button>
+    <p id="mess"></p>
+    
+</body>
+<script type="text/javascript">
+
+function myFunction(){
+    //try和catch必须一起使用,当在try里面接受到值并进行判断会抛出异常，catch就会接受抛出的错误
+    //finally使你能够使用代码，在try和catch之后，不管结果如何都会执行,不管对错都会执行
+    try{ 
+        var x = document.getElementById("demo").value  //获取元素的值
+        //在下面判断，如果错误就抛出错误   throw抛出错误到catch(err)
+        if(x=="") throw "值为空"   
+        if(isNaN(x)) throw "不是数字"
+        if(x<5) throw "数字过小"
+        if(x>10) throw "数字太大"
+
+    }
+    //这里的err接受的时上面throw抛出的错误
+    catch(err){
+        var  y =document.getElementById("mess")
+        y.innerHTML="错误:" + err    //页面显示错误
+
+    }finally{
+        alert("我一直都会执行" )
+        document.getElementById("demo").value= "";
+    }
+}
+</script>
+</html>

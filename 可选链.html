@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+   const person = {
+    details: {
+        name: {
+            firstName: "Michael",
+            lastName: "Lampe",
+        }
+    },
+    jobs: [
+        "Senior Full Stack Web Developer",
+        "Freelancer"
+    ]
+} 
+    // 1:
+    const personFirstName = person.details.name.firstName
+
+
+    console.log(personFirstName)
+    // 2: 
+    if (person &&
+        person.details &&
+        person.details.name) {
+        const personFirstName = person.details.name.firstName
+        console.log(personFirstName)
+    }
+
+    //3:
+    // 其实就是在属性访问符 . 的前面加了个问号。我们看上面语句中第一个 ?. ，从 JS 层面，它表示如果 person 的值为 null 或者 undefined，就不会报错而返回 
+    // undefined，否则才继续访问后面的 details 属性。而如果后面的属性访问链中有任何一个属性为 null 或者 undefined，那么最终的值就为 undefined。
+    // const secondJob = person?.jobs?.[jobNumber] ?? 'none';
+    // const personFirstName = person?.details?.name?.firstName;
+
+    console.log(personFirstName)
+
+</script>
+
+</html>

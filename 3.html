@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <span class="span1">1</span>
+        <span id="spanid" name="spanname">123</span>
+    </div>
+    
+</body>
+<style>
+.span1{
+    width: 200px;
+    height: 20px;
+    background: red;
+    display: block;
+}
+</style>
+<script>    
+      console.log(document.getElementsByClassName('span1')[0].clientWidth)
+      console.log(document.getElementsByClassName('span1')[0].innerHTML) 
+      console.log(document.getElementById("spanid").innerHTML)
+
+    //   var c=0
+    //   function fun(){
+    //     var html = document.getElementsByClassName('span1')[0]
+    //     console.log(html.style.width)
+    //     html.style.width =c+++("px")
+    //     if( html.style.width ==100+("px")){
+    //   clearInterval(setInterval)
+    //     }
+    //   }
+    //   setInterval("fun()","100")
+    //   time()
+    console.log( document.getElementsByClassName("span1")[0].style.offsetHeight) 
+      let num=0
+      let time
+    function seeting(){
+         time = setInterval(function(){ //每隔1s执行一次
+            var html = document.getElementsByClassName("span1")[0].style.width=num+("px")
+            var html1 = document.getElementsByClassName("span1")[0].innerHTML =num
+             if(html ==100+("px")){
+                clear()
+             }
+            num++
+         },100)
+     }
+     setTimeout (seeting,2000) //两秒后执行
+     function clear(){
+         clearInterval(time)
+     }
+
+      
+</script>
+</html>

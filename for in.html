@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    var  mycars =new Array()
+    mycars[0] = "Hello"
+    mycars[1] = "Hello Word"
+    mycars[2] = "Hello Word Drem"
+
+    for ( var x in mycars){
+         console.log(x)   //这里是输出index下标
+         console.log(mycars[x]) //这里输出value 
+        //页面打印后的值
+        // for in.html:56 0
+        // for in.html:57 Hello
+        // for in.html:56 1
+        // for in.html:57 Hello Word
+        // for in.html:56 2
+        // for in.html:57 Hello Word Drem
+     
+    }
+
+    var mycars =["张三","李四","王五"]
+    for(var x  in mycars){
+        console.log(x) //这里是输出index下标
+        console.log(mycars[x]) //这里输出value 
+        // for in.html:70 0
+        // for in.html:71 张三
+        // for in.html:70 1
+        // for in.html:71 李四
+        // for in.html:70 2
+        // for in.html:71 王五
+
+    }
+
+    var mycars = {1:"Saab", 2:"Volvo", 3:"BMW"};
+        
+        mycars.color = "white"
+        
+        for (var x in mycars)
+        {
+        console.log(mycars[x]);
+
+        // for in.html:71 王五
+        // for in.html:87 Saab
+        // for in.html:87 Volvo
+        // for in.html:87 BMW
+        // for in.html:87 white
+        }
+
+
+
+        const array =[num='num1',num2='num2',]
+        console.log(array[0])
+
+</script>
+</html>

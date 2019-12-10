@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    //函数表达式
+    var list = function (num1, num2) {
+        return num1 + num2
+    }
+    let list2 = list(1, 2)
+    document.write(list2)
+    //构造函数
+    // 声明
+    function person(name) {
+        return this.name = name
+    }
+    person.prototype = {}
+    var naNa = new person("iphone")
+    document.write(naNa.name)
+    //arguments 是一个对应于传递给函数的参数的类数组对象
+    function sum(num){
+        console.log(arguments[0],arguments[1],arguments[2])
+    }
+    sum(12,12,12)
+
+    let fun =function(x){
+        return (x)
+    }
+    console.log(fun(1))
+</script>
+
+</html>
