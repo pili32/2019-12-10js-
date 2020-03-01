@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+    //1、join()
+    // 将数组中所有的元素都装华为字符串在一起，最后返回最后发字符串
+    let ArrayJoin=[1,2,3,4,'a','b','v']
+    let newArray = ArrayJoin.join(',')
+    console.log(newArray) 
+    //结果 1,2,3,4,a,b,v
+
+    //2、reverse
+    //将数组中的元素颠倒顺序，返回到这的数组
+    let Arrayreverse=[1,2,3,4,'a','b','v']
+    let newAArrayreverse =Arrayreverse.reverse()
+    console.log(newAArrayreverse) 
+    //结果 (7) ["v", "b", "a", 4, 3, 2, 1]
+    
+    //3、sort()
+    //Array.sort()方法将数组中的元素排序并返回排序后的数组
+    let ArraySort =[1,2,3,4,'a','b','v']
+    let newArraySort = ArraySort.sort()
+    console.log(newArraySort)
+    //结果 (7) [1, 2, 3, 4, "a", "b", "v"]
+
+    //4、concat()
+    //concat() 方法用来合并两个或多个数组
+    let Array1=[1,2,3,4,'a','b','v']
+    let Array2=["C","D",4,"7","9"] 
+    let ArrayReaule = Array1.concat(Array2)
+    console.log(ArrayReaule)
+    //结果 (12) [1, 2, 3, 4, "a", "b", "v", "C", "D", 4, "7", "9"]
+
+    //5 slice()   可改变原数组
+    // 将数组剪切,设定从数组中选择开始的下标(startIndex)和一个结束的下标(endIndex)，切割中间的字段，但是切割的内容包括开始的下标不包括结束的下标
+    let ArrayConcat = [1,2,3,4,'a','b','v']
+    let newArrayConcat = ArrayConcat.slice(2,5)
+    console.log(newArrayConcat)
+    //结果 (3) [3, 4, "a"]
+
+    var arraySplice = [1,2,3,4,'a','b','v']
+    var newarraySplice = arraySplice.splice(6,1)   //index为6的地方开始删除1个value
+     console.log(arraySplice)   // 结果(6) [1, 2, 3, 4, "a", "b"]
+     console.log(newarraySplice)  //  结果 ["v"]
+
+    var arraySplice = [1,2,3,4,'a','b','v']
+    var newarraySplice = arraySplice.splice(2,1,"ddd")   //index为2的地方开始删除1个value,并添加"ddd"
+    console.log(arraySplice)   // 结果(8) [1, 2, "ddd", 4, "a", "b", "v"]
+    console.log(newarraySplice)  //  结果 [3]
+    
+    //6、push() 后増   可改变原数组
+    //是向数组最后面添加一个值,并且返回一个数组的新长度,这个会改变原数组
+    let ArrayPush = [1,2,3,4,'a','b','v']
+    let newArrayPush = ArrayPush.push("g")  //向数组末尾"g"
+    console.log(ArrayPush)   //结果(8) [1, 2, 3, 4, "a", "b", "v", "g"]
+    console.log(newArrayPush)  //结果8
+
+    //7、pop()  可改变原数组
+    //用于删除并返回最后一个元素。
+    let ArrayPop = [1,2,3,4,'a','b','v',"8"]
+    let newArrayPop = ArrayPop.pop()  //删除最后一个字段
+    console.log(ArrayPop)  //结果(7) [1, 2, 3, 4, "a", "b", "v"]
+    console.log(newArrayPop)  //结果8
+
+    //8、unshift()  可改变原数组
+    //unshift()在数组的头部添加一个或多个元素，并将已经存在的元素移动到下一个位置。最后返回元素新的长度
+    let ArrayUnshift = [1,2,3,4,'a','b','v',"8"]
+    let  newArrayUnshift = ArrayUnshift.unshift("5","8")  
+    console.log(ArrayUnshift)       //结果返回新的数组(10) ["5", "8", 1, 2, 3, 4, "a", "b", "v", "8"]
+    console.log(newArrayUnshift)    //结果返回数组长度 10
+
+    //9、shift()  可改变原数组
+    //shift()删除数组的第一个元素并将他返回，然后把所有随后的元素下移一个位置填补数组头部的空缺
+    let ArrayShift = [1,2,3,4,'a','b','v',"8"]
+    let newArrayShift = ArrayShift.shift()
+    console.log(ArrayShift)   //结果返回新的数组  [2, 3, 4, "a", "b", "v", "8"]
+    console.log(newArrayShift)  //结果返回呗删除的数组1
+
+    //10、filter() 过滤
+    //方法返回数组中满足条件的元素组成的新数组，原数组不变
+     //方法有三个参数  第一个current为当前值，第二个index为下标，第三个array为当前数组
+    let ArrayFilter= [1,2,3,4,'a','b','v',"8"]
+    let newArrayFilter = ArrayFilter.filter((current,index,array)=>{
+        return current<5   //判断小于5的数字
+    })
+    console.log(ArrayFilter)  //结果返回小于5的数组8) [1, 2, 3, 4, "a", "b", "v", "8"]
+    console.log(newArrayFilter) //结果返回原数组
+
+
+    //11、map() 格式化数组
+    //方法将调用的数组的每个元素传递给指定的函数，并返回一个值
+
+    let ArrayMap = [1,2,3,4,'a','b','v',"8"]
+     //方法有三个参数  第一个current为当前值，第二个index为下标，第三个array为当前数组
+    let newArrayMap = ArrayMap.map((current,index,array)=>{
+        return current + 1
+    })
+    console.log(ArrayMap)  //返回结果为原数组(8) [1, 2, 3, 4, "a", "b", "v", "8"]
+    console.log(newArrayMap) //返回结果所有元素加1(8) [2, 3, 4, 5, "a1", "b1", "v1", "81"]
+
+
+    //12、every()
+    //对数组的每个元素判断是否都满足条件，如果有一个不满足就为false，如果全部满足结果就是true
+    
+    let ArrayEvery = [1,2,3,4,,5,6]
+     //方法有三个参数  第一个current为当前值，第二个index为下标，第三个array为当前数组
+    let newArrayEvery = ArrayEvery.every((current,index,array)=>{
+        return current<8
+    })
+    let newArrayEvery1 =ArrayEvery.every((current,index,array)=>{
+        return current<4
+    })
+    console.log(newArrayEvery)  //结果为true 所有条件满足才为true 都满足小于8
+    console.log(newArrayEvery1)//结果为false 有一个条件不满足都为false
+    
+    //13 reduce()
+    //reduce() 方法接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，最终计算为一个值
+    //prey 表示上一次回调使用时的返回值,或者初始值Init,cur表示当前值,index表示数组的索引,init表示初始值 arr表示原数组
+    let ArrayEReduce = [1,2,3,4,,5,6]
+    let newArrayEReduce = ArrayEReduce.reduce((prev,cur,index,arr)=>{
+        return prev+cur     //把数组中回调的值加上当前的值
+    })
+    console.log(newArrayEReduce)//结果为 21
+
+    //14、indexOf()  和 lastIndexOf()
+    //indexOf(某元素,startIndex) 从startIndex开始，查找某元素在数组中的位置，若存在，则返回第一个位置的下标,否则返回-1
+    //lastIndexOf(某元素，startIndex) 和indexOf()相同，区别在于从尾部向首部查询
+
+    let ArrayindexOf = [1,2,3,4,,5,6]
+    let newArrayindexOf =ArrayindexOf.indexOf(3) 
+    console.log(newArrayindexOf)
+    //结果为 2 找到Value3的下标为2
+    let newArrayindexOf1 =ArrayindexOf.indexOf(8)
+    //结果为-1 没有找到8在数组中的位置 所以返回-1
+    console.log(newArrayindexOf1)
+
+    //15 some()
+    //对数组的每一项都运行给定的函数，若存在一项或多项返回 ture,则返回 true
+    let ArraySome = [1,2,3,4,,5,6]
+    //方法有三个参数  第一个current为当前值，第二个index为下标，第三个array为当前数组
+    var newArraySome = ArraySome.some((current,index,array)=>{
+       return current > 4
+    })
+    var newArraySome1 = ArraySome.some((current,index,array)=>{
+       return current > 6
+    })
+    console.log(newArraySome) //结果为true，数组中有一项数据大于4就为true
+    console.log(newArraySome1) //结果为false，数组中所有数据没大于6就为false
+
+
+    //16 forEach()
+    //方法用于调用数组的每一个元素，并将元素传递给回调函数   
+    let ArrayForEach= [1,2,3,4,'a','b','v',"8"]
+    //三个参数 item表示当前元素   index代表下标 arr表示原数组
+    let list=[]
+    let newArrayForEach = ArrayForEach.forEach((item,index,arr)=>{
+        console.log(item)
+        console.log(index)
+        console.log(arr)
+    })
+
+
+    </script>
+</html>
