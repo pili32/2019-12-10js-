@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>class 类</title>
+    <meta http-equiv="Cache-Control" content="max-age=7200" />
+    <meta http-equiv="Expires" content="Mon, 20 Jul 2013 23:00:00 GMT" />
+</head>
+<body>
+    
+</body>
+
+<script >
+/**
+ *  Generator函数是一个普通函数，但是有两个特征
+ * 1.unction关键字与函数名之间有一个星号
+ * 2.函数体内部使用yield语句，定义不同的内部状态（yield语句在英语里的意思就是“产出”）
+*/
+    let fun = function(){
+        console.log( "我是普通函数")
+    }
+    fun() //我是普通函数
+
+    function* generator(){
+        yield 'status one'
+        return '我是普通函数'
+    }
+// yield  表示停止执行  如果出现一次就代表函数执行第一次的时候到这里就停止,当函数执行第二次的时候就会跳过 yield执行return   
+    generatorFunction  = generator() // {value: "status one", done: false}   //done表示未执行完
+    generatorFunction.next() //  {value: 我是普通函数, done: true}
+
+
+    function* generator1(){
+        yield "第一次执行暂停"
+        yield '第二次执行暂停'
+        yield '第三次执行暂停'
+
+        return '第四次执行完成'
+
+    }
+
+    let B = generator1()
+    B.next()  // {value: "第一次执行暂停", done: false}
+    B.next()  // {value: "第二次执行暂停", done: false}
+    B.next()  //{value: "第三次执行暂停", done: false}
+    B.next()  //{value: "第四次执行完成", done: true}
+
+
+class Foo {
+  constructor(...args) {
+    this.args = args;
+  }
+  //为每一个对象定义了默认的迭代器。该迭代器可以被 for...of 循环使用
+  * [Symbol.iterator]() {
+    for (let arg of this.args) {
+      yield arg;
+    }
+  }
+}
+
+for (let x of new Foo('hello', 'world')) {
+  console.log(x);
+}
+// hello
+// world
+
+
+
+</script>
+
+</html>
