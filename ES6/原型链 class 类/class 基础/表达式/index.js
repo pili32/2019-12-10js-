@@ -156,4 +156,21 @@ Person.className() // hello
     * 
   */
 
+   class Value{
+      prop ="我是动态prop"
+      static prop ="我是静态属性prop"     
+      constructor(){
+         this.count = "我是实例的count"
+      }
+  }
+  let value = new Value()
+   value.count  //1
+   value.prop //我是动态prop
+   Value.prop  //我是静态属性prop
+   /**如上代码, 在类中属性前面加上static 就是类的静态属性，只能类调用
+    * 
+    * 
+  */
+
+
 
