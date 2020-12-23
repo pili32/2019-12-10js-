@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+    /**
+     * 扩展运算符（spread）是三个点（...）。它好比 rest 参数的逆运算，将一个数组转为用逗号分隔的参数序列
+     * 该运算符主要用于函数调用
+    */
+    
+
+    let arr = [1,2,3]
+
+    let person = function(a,b,c){
+        console.log(a,b,c)   //=>1,2,3
+    }
+    person(...arr)
+
+    let arr = [10,20,30,40,50,60]
+    let arr1 = [70,80,90]
+    arr.push(...arr1)   //10,20,30,40,50,60,70,80,90
+
+
+    let arr = [ 1,1,2,3,4,5,5]
+
+    // var num = ''
+    // var j = ''
+    // for(var i=1;i<arr.length-1;i++){
+    //      num = i
+    //      j = i
+    //     if(num == j){
+    //         j=num
+    //     }else{
+    //         j=num
+    //     }
+    //     console.log(j)
+    // }
+
+
+    arr.forEach(item=>{
+        var num = item
+        var num1 = item
+        if(num == num1){
+            num1 = num
+          console.log(num1)
+
+        }
+    })
+
+</script>
+</html>

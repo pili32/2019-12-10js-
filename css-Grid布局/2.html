@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <div id="box">
+        <span>这是Gaid布局</span>
+        <div id="container">
+            <div class="item item-1">1</div>
+            <div class="item item-2">2</div>
+            <div class="item item-3">3</div>
+            <div class="item item-4">4</div>
+            <div class="item item-5">5</div>
+            <div class="item item-6">6</div>
+            <div class="item item-7">7</div>
+            <div class="item item-8">8</div>
+            <div class="item item-9">9</div>
+
+        </div>
+    </div>
+   
+    
+</body>
+
+
+
+<style >
+
+ /* 
+    display:grid   指定一个容器采用网格布局;
+    grid-template-columns属性定义每一列的列宽
+    grid-template-rows属性定义每一行的行高
+ */
+    html,body{
+        width: 100%;
+        height: 100%;
+    }
+    #box{
+        width: 500px; 
+        height: 200px;
+        margin: auto;
+
+    }
+    /* 
+        有时，单元格的大小是固定的，
+        但是容器的大小不确定。
+        如果希望每一行（或每一列）容纳尽可能多的单元格，这时可以使用auto-fill关键字表示自动填充
+        auto-fill:表示自动填充
+        表示每列宽度100px，然后自动填充，直到容器不能放置更多的列
+    */
+    #container{
+        display: grid;
+    grid-template-columns: 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px;
+    grid-auto-rows: 50px;
+    }
+
+    .item{
+        line-height: 100px;
+        text-align: center;
+        border: 1px solid #ddd
+    }
+ 
+    .item-1 {
+    background-color: #ef342a;
+    /* grid-column-start: 2; */
+    }
+    .item-2 {
+    background-color: #f68f26;
+    }
+    .item-3 {
+    background-color: #4cd946;
+    }
+    .item-4 {
+    background-color: #0376c2;
+    }
+    .item-5 {
+    background-color: #c077af;
+    }
+    .item-6 {
+    background-color: #215481;
+    }
+    .item-7 {
+    background-color: #f45343;
+    }.item-8 {
+    background-color: #c15481;
+    grid-row-start: 4;
+  grid-column-start: 2;
+    }
+    .item-9 {
+    background-color: rgb(94, 91, 91);
+    grid-row-start: 5;
+    grid-column-start: 3;
+
+
+    }
+
+</style>
+</html>
