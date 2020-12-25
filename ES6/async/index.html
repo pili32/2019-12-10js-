@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+    /**
+     * 使用一步方法async await时,在函数前面需要加上async
+     * 
+     * 
+     */
+    function loading(num) {
+        //resolve 接收成功
+        //reject 接收失败
+        let promise = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (num < 5) {
+                    resolve(`${num}小于5`)
+                }
+                reject(`${num}大于5`)
+            }, num * 10);
+        })
+        return promise
+    }
+
+    async function Fun() {
+        let num = Math.ceil(Math.random() * 10); //生成1-10的随机数
+        let result = await loading(num).then((val) => {
+            //这里接收loading异步回调中成功的返回
+            console.log(val) //1小于5
+            return val
+
+        }).catch((val) => {
+            //这里接收loading异步回调中成错误的返回
+            console.log(val) //9大于5
+            return val
+
+        })
+        console.log(result) //这里result是不管是成功还是失败的返回值
+
+    }
+    Fun()
+
+
+    //正常情况下，await命令后面是一个 Promise 对象，
+    //返回该对象的结果。如果不是 Promise 对象，就直接返回对应的值
+
+    async function fun() {
+        return await "555"
+    }
+    fun().then(v => console.log(v)) //555
+
+
+
+
+
+    function loadingStep(n) {
+        return new Promise(res => { //执行一步方法，并返回结果
+            setTimeout(() => {
+                res(n + 200) //每次n+200  300+200  500+200 700+200
+            }, n);
+        })
+    }
+
+    function step1(n) {
+        console.log(`step1 with ${n}`); //n == 300
+        return loadingStep(n); //在这里调用loadingStep函数
+    }
+
+    function step2(n) {
+        console.log(`step2 with ${n}`); //n == 500
+        return loadingStep(n);
+    }
+
+    function step3(n) {
+        console.log(`step3 with ${n}`); //n == 700
+        return loadingStep(n);
+    }
+
+    //   let asyncStpe = (()=>{
+    //       let time = 300;
+    //       console.log(time)    //首先执行
+    //       step1(time) //这里执行第一个step1函数
+    //       .then(time2=>step2(time2))    //这里接收第一次执行的loadingStep方法中的返回time2为返回值并在传入step2
+    //       .then(time3=>step3(time3))    //这里接收第二次执行的loadingStep方法中的返回time3为返回值并往下执行
+    //       .then(result =>{  //这里执行的是最后一步
+    //         console.log(`result is ${result}`)
+    //       })
+
+    //   })
+
+    //下面写法效果一致
+    async function asyncStpe() {
+        let time = 300;
+        console.log(time) //首先执行
+        const time1 = await step1(time)
+        const time2 = await step2(time1)
+        const result = await step3(time2)
+        console.log(`result is ${result}`)
+    }
+
+    asyncStpe()
+
+
+    /**
+      300
+      index.html:23 step1 with 300
+      index.html:28 step2 with 500
+      index.html:33 step3 with 700
+      index.html:44 result is 900
+    */
+
+
+    //   async 函数有多种使用形式
+
+    //函数声明
+    async function asyncFun() {}
+
+    //函数表达式
+    const asyncFun = async function AsyncFun() {}
+
+    //对象的方法
+    let obj = {
+        async asyncFun() {}
+    };
+    obj.asyncFun().then()
+
+    //class方法
+
+    class Storage {
+        constructor() {
+            this.cachePromise = caches.open('avatars');
+        }
+
+        async getAvatar(name) {
+            const cache = await this.cachePromise;
+            return cache.match(`/avatars/${name}.jpg`);
+        }
+    }
+
+    const storage = new Storage();
+    storage.getAvatar('jake').then();
+
+
+    //箭头函数
+    const asyncFun = async() => {}
+
+
+    //错误处理
+    async function f() {
+        await new Promise(function(resolve, reject) {
+            throw new Error('出错了')
+        })
+    }
+    f().then(v => {
+        console.log(e)
+
+    }).catch(e => {
+        console.log(`这里抛出${e}`) // 这里抛出Error: 出错了
+    })
+
+
+
+    async function fun() {
+        try {
+            await new Promise(function(resolve, reject) {
+                throw new Error("出错了")
+            })
+        } catch (error) {
+
+        } finally {
+            console.log("我一直都会执行")
+        }
+        return await ('hello word')
+    }
+    fun()
+</script>
+
+</html>
