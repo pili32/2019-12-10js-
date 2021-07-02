@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>删除重复数组</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+    // 1.
+    //Array.from() 方法从一个类似数组或可迭代对象创建一个新的，浅拷贝的数组实例
+    //new Set()  方法将数组去重
+
+
+    var fruits = ["a", "b", "a", "c", "d", "b", "a", "e", "a", "f", "a", "b", ]
+    const delRepeatArr = Array.from(new Set(fruits))
+        // document.write(delRepeatArr) //a,b,c,d,e,f
+
+    // 2.利用for嵌套for，然后splice去重
+    var delRepeat = (arr) => {
+        for (var i = 0; i < arr.length; i++) {
+            for (var j = i + 1; j < arr.length; j++) {
+                if (arr[i] == arr[j]) {
+                    arr.splice(j, 1)
+                    j--
+                }
+            }
+        }
+        return arr
+    }
+
+    var arr = [1, 1, 'true', 'true', true, true, 15, 15, false, false, undefined, undefined, null, null, NaN, NaN, 'NaN', 0, 0, 'a', 'a', {}, {}]
+    delRepeat(arr)
+        // document.write(delRepeat(arr)) //1,true,15,false,,NaN,NaN,NaN,a,[object Object],[object Object]
+
+    //3.利用indexOf去重
+    //Array.isArray()  判断传进来的是否是一个数组
+    //indexOf() 判断下标是否存在 -1 表示不存在,如果存在就返回下标
+    var delRepeat1 = (arr1) => {
+        if (!Array.isArray(arr1)) {
+            alert("不是一个数组")
+            return
+        }
+        var array = []
+        for (var i = 0; i < arr1.length; i++) {
+            if (array.indexOf(arr[i]) === -1) {
+                array.push(arr[i])
+            }
+        }
+        return array
+    }
+    var arr = [1, 1, 'true', 'true', true, true, 15, 15, false, false, undefined, undefined, null, null, NaN, NaN, 'NaN', 0, 0, 'a', 'a', {}, {}]
+    delRepeat1(arr)
+    document.write(delRepeat1(arr)) //1,true,true,15,false,,,NaN,NaN,NaN,0,a,[object Object],[object Object]
+</script>

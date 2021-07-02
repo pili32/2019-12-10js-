@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>数据交换图表</title>
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+    <script src="./main.js"></script>
+    <script src="./china.js"></script>
+    <script src="./world.js"></script>
+    <script>
+        // <script src="./china.js">  中国地图Js须引入，否则地图出不来
+    </script>
+
+
+    <link rel="stylesheet" href="loading.css">
+</head>
+
+<body>
+    <div style="height:90%;height:100%">
+        <div id="myChartChina" style="width:100%; height: 100%;"></div>
+        <!-- <Loading v-if="isLoading" /> -->
+        <div class="nationwide">
+            <h5>全国</h5>
+            <span>总传输数量</span>
+            <span class="num1 Blue"></span>
+            </br>
+            <span>总传输成功数量</span>
+            <span class="num2 Blue"></span>
+            </br>
+            <span>总传输成功文件数量</span>
+            <span class="num3 Blue"></span>
+
+        </div>
+        <div class="loading-container">
+            <div class="column">
+                <div class="container animation-6">
+                    <div class="shape shape1"></div>
+                    <div class="shape shape2"></div>
+                    <div class="shape shape3"></div>
+                    <div class="shape shape4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+<script type="text/javascript">
+    $(function() {
+        $(".num1").text(0)
+        $(".num2").text(0)
+        $(".num3").text(0)
+
+        var echartsData = {
+            "msg": "操作成功",
+            "code": 40000,
+            "data": [{
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "110000000000000",
+                "localityname": "北京市",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "120000000000000",
+                "localityname": "天津市",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "130000000000000",
+                "localityname": "河北省",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "140000000000000",
+                "localityname": "山西省",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "150000000000000",
+                "localityname": "内蒙古自治区",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "210000000000000",
+                "localityname": "辽宁省",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "220000000000000",
+                "localityname": "吉林省",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "230000000000000",
+                "localityname": "黑龙江省",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "310000000000000",
+                "localityname": "上海市",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "320000000000000",
+                "localityname": "江苏省",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "330000000000000",
+                "localityname": "浙江省",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "340000000000000",
+                "localityname": "安徽省",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "350000000000000",
+                "localityname": "福建省",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "360000000000000",
+                "localityname": "江西省",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "370000000000000",
+                "localityname": "山东省",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "410000000000000",
+                "localityname": "河南省",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "420000000000000",
+                "localityname": "湖北省",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "430000000000000",
+                "localityname": "湖南省",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "440000000000000",
+                "localityname": "广东省",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "450000000000000",
+                "localityname": "广西壮族自治区",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "460000000000000",
+                "localityname": "海南省",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "500000000000000",
+                "localityname": "重庆市",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "510000000000000",
+                "localityname": "四川省",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "520000000000000",
+                "localityname": "贵州省",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "530000000000000",
+                "localityname": "云南省",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "540000000000000",
+                "localityname": "西藏自治区",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "610000000000000",
+                "localityname": "陕西省",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "620000000000000",
+                "localityname": "甘肃省",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "630000000000000",
+                "localityname": "青海省",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "640000000000000",
+                "localityname": "宁夏回族自治区",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "650000000000000",
+                "localityname": "新疆维吾尔自治区",
+                "bfb": "0.00%"
+            }, {
+                "sbcgsjjls": 0,
+                "rwsjjlts": 0,
+                "sbcgwjs": 0,
+                "localitycode": "660000000000000",
+                "localityname": "新疆建设兵团",
+                "bfb": "0.00%"
+            }]
+        }
+
+        // 基于准备好的dom，初始化echarts实例
+
+        var myChart = echarts.init(document.getElementById('myChartChina'));
+        $(".loading-container").show()
+        if (echartsData.code == 40000) {
+            var mydata = new Array();
+            var BJData = new Array();
+            var sums = 0;
+            var sumsCG = 0;
+            var sumsCGWJ = 0;
+            var sum, sumCG, sumCGwj;
+
+            var data = [...echartsData.data]
+            for (var i = 0; i < data.length; i++) {
+                let strName = (data[i].localityname);
+                if (strName == "西藏自治区 " || strName == "宁夏回族自治区" || strName == '新疆维吾尔自治区' || strName == "新疆兵团" || strName == "广西壮族自治区" || strName == "内蒙古自治区") {
+                    if (strName != "新疆兵团") {
+                        if (strName == "内蒙古自治区") {
+                            let objs = {
+                                name: (data[i].localityname).substring(0, 3),
+                                value: (data[i].bfb) == '' ? 0 : parseFloat(((data[i].bfb).substring(0, (data[i].bfb).length))),
+                                zsl: data[i].rwsjjlts,
+                                cgsl: data[i].sbcgsjjls,
+                                cgwjsl: data[i].sbcgwjs
+                            }
+                            mydata.push(objs);
+                            if (data[i].bfb != '') {
+                                let dataArr = [{
+                                    name: (data[i].localityname).substring(0, 3)
+                                }, {
+                                    name: '北京'
+                                }]
+                                BJData.push(dataArr);
+                            }
+                        } else {
+                            let objs = {
+                                name: (data[i].localityname).substring(0, 2),
+                                value: (data[i].bfb) == '' ? 0 : parseFloat(((data[i].bfb).substring(0, (data[i].bfb).length))),
+                                zsl: data[i].rwsjjlts,
+                                cgsl: data[i].sbcgsjjls,
+                                cgwjsl: data[i].sbcgwjs
+                            }
+                            mydata.push(objs);
+                            if (data[i].bfb != '') {
+                                let dataArr = [{
+                                    name: (data[i].localityname).substring(0, 2)
+                                }, {
+                                    name: '北京'
+                                }]
+                                BJData.push(dataArr);
+                            }
+                        }
+                    }
+                } else {
+                    let objs = {
+                        name: (data[i].localityname).substring(0, (data[i].localityname).length - 1),
+                        value: (data[i].bfb) == '' ? 0 : parseFloat(((data[i].bfb).substring(0, (data[i].bfb).length))),
+                        zsl: data[i].rwsjjlts,
+                        cgsl: data[i].sbcgsjjls,
+                        cgwjsl: data[i].sbcgwjs
+                    }
+                    mydata.push(objs);
+                    if (data[i].bfb != '') {
+                        let dataArr = [{
+                            name: (data[i].localityname).substring(0, (data[i].localityname).length - 1)
+                        }, {
+                            name: '北京'
+                        }]
+                        BJData.push(dataArr);
+                    }
+                }
+                sums = sums + (data[i].rwsjjlts);
+                sumsCG = sumsCG + (data[i].sbcgsjjls);
+                sumsCGWJ = sumsCGWJ + (data[i].sbcgwjs);
+
+            }
+
+            $(".num1").text(sums)
+            $(".num2").text(sumsCG)
+            $(".num3").text(sumsCGWJ)
+            mydata.push({
+                name: '香港',
+                value: 0,
+                zsl: 0,
+                cgsl: 0,
+                cgwjsl: 0
+            });
+            mydata.push({
+                name: '澳门',
+                value: 0,
+                zsl: 0,
+                cgsl: 0,
+                cgwjsl: 0
+            });
+            mydata.push({
+                name: '台湾',
+                value: 0,
+                zsl: 0,
+                cgsl: 0,
+                cgwjsl: 0
+            });
+            mydata.push({
+                name: '南海诸岛',
+                value: 0,
+                zsl: 0,
+                cgsl: 0,
+                cgwjsl: 0
+            });
+            let geoCoordMap = {
+                '北京': [116.4551, 40.2539],
+                '天津': [117.4219, 39.4189],
+                '上海': [121.4648, 31.2891],
+                '重庆': [107.7539, 30.1904],
+                '河北': [114.5369, 38.0418], //
+                '河南': [113.4668, 34.6234],
+                '云南': [102.9199, 25.4663],
+                '辽宁': [122.2229, 39.4409],
+                '黑龙江': [126.6619, 45.7423], //
+                '湖南': [113.0823, 28.2568],
+                '安徽': [117.29, 32.0581],
+                '山东': [117.0265456171, 36.6743284816], //
+                '新疆': [87.6340177717, 43.7990124498], //
+                '江苏': [119.4543, 31.5582],
+                '浙江': [120.0037, 29.1028],
+                '江西': [116.0046, 28.6633],
+                '湖北': [114.3896, 30.6628],
+                '广西': [108.479, 23.1152],
+                '甘肃': [103.8332107911, 36.0663175116], //
+                '山西': [112.5850872401, 37.8201065173], //
+                '内蒙古': [111.7721364279, 40.8243045435],
+                '陕西': [108.9605856596, 34.2714988839], //
+                '吉林': [125.3323835941, 43.9026491664],
+                '福建': [119.3026762518, 26.1071818357],
+                '贵州': [106.7122456077, 26.6061388469], //
+                '广东': [113.2728132808, 23.1392435095],
+                '青海': [101.7867107477, 36.6276330201], //
+                '西藏': [91.1240382601, 29.6528947341],
+                '四川': [104.0828170401, 30.6569116497],
+                '宁夏': [106.0812006517, 38.6185731589], //
+                '海南': [110.3552658577, 20.0249060955],
+                '台湾': [121.5304888883, 25.0337797504],
+                '香港': [114.1720064282, 22.2810079531],
+                '澳门': [113.5556075793, 22.2048369936]
+            };
+            let planePath = 'path://M1705.06,1318.313v-89.254l-319.9-221.799l0.073-208.063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134.449-92.931l12.238-241.308L1705.06,1318.313z';
+            let convertData = function(data) {
+                var res = [];
+                for (var i = 0; i < data.length; i++) {
+                    var dataItem = data[i];
+                    var fromCoord = geoCoordMap[dataItem[0].name];
+                    var toCoord = geoCoordMap[dataItem[1].name];
+                    if (fromCoord && toCoord) {
+                        res.push([{
+                            coord: fromCoord
+                        }, {
+                            coord: toCoord
+                        }]);
+                    }
+                }
+                console.log(res)
+                return res;
+            };
+            let color = ['#8d8d8d', '#ffa022', '#46bee9'];
+            let series = [{
+                    name: '数据',
+                    type: 'map',
+                    mapType: 'china',
+                    roam: false,
+                    zoom: 1.1,
+                    label: {
+                        show: true,
+                        fontSize: 12,
+                        fontWeight: 'bold',
+                    },
+                    itemStyle: {
+                        normal: {
+                            areaColor: '#323c48',
+                            borderColor: '#ffffff'
+                        },
+                        emphasis: {
+                            areaColor: '#eeeeee'
+                        }
+                    },
+                    data: mydata //数据
+                },
+                // {
+                //     type: 'scatter',
+                //     coordinateSystem: 'geo',
+                //     data: [{name:'五角星',value:[116.4551, 40.2539]}],
+                //     symbolSize: 25,
+                //     symbol: 'path://M958.733019 411.348626 659.258367 353.59527 511.998465 85.535095 364.741633 353.59527 65.265958 411.348626 273.72878 634.744555 235.88794 938.463881 511.998465 808.479435 788.091594 938.463881 750.250754 634.744555Z',
+                //     label: {
+                //         emphasis: {
+                //             show: false
+                //         }
+                //     },
+                //     itemStyle: {
+                //         color: '#ff0000'
+                //     }
+                // },
+                {
+                    type: 'lines',
+                    zlevel: 1,
+                    effect: {
+                        show: true,
+                        period: 6,
+                        trailLength: 0.7,
+                        color: '#fff',
+                        symbolSize: 3
+                    },
+                    lineStyle: {
+                        color: color[0],
+                        width: 1,
+                        curveness: 0.2
+                    },
+                    data: convertData(BJData)
+                }, {
+                    type: 'lines',
+                    zlevel: 2,
+                    effect: {
+                        show: true,
+                        period: 6,
+                        trailLength: 0,
+                        symbol: planePath,
+                        symbolSize: 15
+                    },
+                    lineStyle: {
+                        color: color[0],
+                        width: 1,
+                        opacity: 0.4,
+                        curveness: 0.2
+                    },
+                    data: convertData(BJData)
+                }, {
+                    type: 'effectScatter',
+                    coordinateSystem: 'geo',
+                    zlevel: 2,
+                    rippleEffect: {
+                        brushType: 'stroke'
+                    },
+                    label: {
+                        normal: {
+                            show: false,
+                            position: 'right'
+                        }
+                    },
+                    symbolSize: function(val) {
+                        return val[2] / 8;
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: color[0]
+                        }
+                    },
+                    data: BJData.map(function(dataItem) {
+                        return {
+                            name: dataItem[1].name,
+                            value: geoCoordMap[dataItem[1].name].concat([dataItem[1].value])
+                        };
+                    })
+                }
+            ];
+            let option = {
+                backgroundColor: '#FFFFFF',
+                title: {
+                    text: '全国数据交互汇总上报统计图',
+                    subtext: '',
+                    textStyle: {
+                        fontSize: 26,
+                    },
+                    x: 'center',
+                    top: '10'
+                },
+                tooltip: {
+                    padding: 10,
+                    backgroundColor: '#222',
+                    borderColor: '#777',
+                    borderWidth: 1,
+                    formatter: function(obj) {
+                        if (obj.componentSubType == "map") {
+                            var name = obj.data.name;
+                            return '<div style="font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">' +
+                                name +
+                                '</div>' +
+                                '总传输数量：' + obj.data.zsl + '<br>' +
+                                '传输成功数量：' + obj.data.cgsl + '<br>' +
+                                '传输成功文件数量：' + obj.data.cgwjsl + '<br>' +
+                                '传输成功率：' + obj.data.value + '%<br>';
+                        }
+                    }
+                },
+                //左侧小导航图标
+                visualMap: {
+                    show: true,
+                    x: 'left',
+                    left: '30',
+                    bottom: '30',
+                    splitList: [{
+                        start: 0,
+                        end: 0,
+                        label: '传输成功率0%'
+                    }, {
+                        start: 50,
+                        end: 80,
+                        label: '传输成功率50%~80%'
+                    }, {
+                        start: 1,
+                        end: 50,
+                        label: '传输成功率不足50%'
+                    }, {
+                        start: 80,
+                        label: '传输成功率高于80%'
+                    }, ],
+                    color: ["#29CFCD", '#A0D468', '#f1c049', '#DEDFE1']
+                },
+                geo: {
+                    map: 'china',
+                    label: {
+                        show: true,
+                        fontSize: 12,
+                        fontWeight: 'bold'
+                    },
+                    emphasis: {
+                        show: false
+                    },
+                    roam: false,
+                    zoom: 1.1,
+                },
+
+                series: series,
+            };
+
+            myChart.setOption(option);
+
+            setTimeout(() => {
+                $(".loading-container").hide()
+            }, 2000);
+        } else {
+            // this.$Message.error(res.data.msg);
+        }
+    });
+</script>
+
+</html>
