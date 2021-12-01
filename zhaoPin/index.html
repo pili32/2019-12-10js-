@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name = 'applicable-device' content = 'mobile'>
+    <title>教育部网站</title>
+</head>
+<body>
+    <header>
+        <img class="hader_img" src="./image/banner.jpg" alt="">
+    </header>
+    <div class="body">
+        <div class="content">
+            <div class="content_connect">
+                <span> <a href="#">2021全省基层医疗卫生人才专场招聘会</a> </span>
+            </div>
+            <div class="content_img">
+                <img  class='bac_img' src="./image/img.jpg" alt="">
+            </div>
+            <footer>
+                <div class="foot_top">
+                    <span>关于中心</span>
+                    <span>|</span>
+                    <span>中心介绍</span>
+                    <span>|</span>
+                    <span>中心地址</span>
+                </div>
+                <p>主管单位：湖北省卫生健康委员会　主办单位：湖北省卫生计生人才交流发展中心　|　湖北省医学考试中心　技术支持：武汉品亿信息技术有限公司</p>
+                <p>
+                    <span>地址：湖北省武汉市武昌区洪山路64号湖光大厦12楼, 邮编：430071 鄂公网安备42010602000275号</span>
+                </p>
+                <p>咨询电话：高级职称评审、医师资格考试027-87238660  中初级考试 027-87232296  人事代理 027-87238610</p>
+            </footer>
+        </div>
+    </div>
+   
+</body>
+</html>
+
+<style >
+@media screen and (min-width: 320px) {
+    html {font-size: 10px;}
+    a{
+        font-size: 12px;
+    }
+}
+ 
+@media screen and (min-width: 360px) {
+    html {font-size: 12px;}
+    a{
+        font-size: 14px;
+    }
+}
+ 
+@media screen and (min-width: 400px) {
+    html {font-size: 12px;}
+    a{
+        font-size: 16px;
+    }
+}
+ 
+@media screen and (min-width: 440px) {
+    html {font-size: 16px;}
+    a{
+        font-size: 18px;
+    }
+}
+ 
+@media screen and (min-width: 480px) {
+    html {font-size: 18px;}
+    a{
+        font-size: 20px;
+    }
+}
+ 
+@media screen and (min-width: 640px) {
+    html {font-size: 20px;}
+    a{
+        font-size: 34px;
+    }
+}
+@media screen and (min-width: 750px) {
+    html {font-size: 22px;}
+    a{
+        font-size: 36px;
+    }
+}
+@media screen and (min-width: 820px) {
+    html {font-size: 22px;}
+    a{
+        font-size: 38px;
+    }
+}
+@media screen and (min-width: 960px) {
+    html {font-size: 22px;}
+    a{
+        font-size: 40px;
+    }
+}
+    body{
+        padding: 0;
+        margin: 0;
+    }
+    html{
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+    img{
+        display : block
+        
+    }
+
+    header{
+        width: 100%;
+        /* height: 680px; */
+        background-size: 100% 100%;
+        background-color: #00a1e7;
+    }
+    .hader_img{
+        width: 100%;
+    }
+    .body{
+        background-color: #00a1e7;
+        /* padding: 50px 0 0 0; */
+        width: 100%;
+    }
+    .content{
+        width: 80%;
+        background: #fff;
+        margin: auto;
+    }
+    .content_connect{
+        width: 100%;
+        line-height: 10rem;
+        background: #fff;
+        text-align: center;
+        font-size: 28px;
+    }
+    a {
+        text-decoration: none;
+        color: #00a1e7;
+    }
+    .content_img{
+        width: 70%;
+        margin: auto;
+        overflow: auto;
+    }
+    .bac_img{
+        width: 100%;
+        background-size:cover;
+        height: auto
+    }
+    footer{
+        border-top: 1px
+        solid #ccc;
+        padding: 25px 0 50px 0 ;
+        float: left;
+        width: 100%;
+        margin-top: 25px;
+        text-align: center;
+        /* font-size: 0.1rem; */
+        
+    }
+    .foot_top{
+        /* width: 300px; */
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 20px
+
+    }
+
+    
+
+</style>
+
+
+<script>
+   function getHeight() {
+        var offsetWidth  = document.body.offsetWidth
+        if(offsetWidth < 750) {
+         document.getElementsByClassName('bac_img')[0].src='./image/img.jpg'
+            
+        }
+        console.log(offsetWidth)
+   }
+   getHeight()
+    
+</script>

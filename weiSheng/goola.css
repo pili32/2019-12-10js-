@@ -1,0 +1,173 @@
+HTML,
+body,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+dl,
+li,
+dt,
+dd,
+p,
+blockquote,
+pre,
+form,
+fieldset,
+table,
+th,
+td {
+    border: none;
+    font-family: "微软雅黑", "黑体", "宋体";
+    margin: 0px;
+    padding: 0px;
+}
+
+html,
+body {
+    width: 100%;
+    /* font-size: calc(100vw/7.5); */
+}
+
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var {
+    font-style: normal;
+    font-weight: normal;
+}
+
+a {
+    text-decoration: none;
+}
+
+input::-ms-clear {
+    display: none;
+}
+
+input::-ms-reveal {
+    display: none;
+}
+
+input {
+    -webkit-appearance: none;
+    margin: 0;
+    outline: none;
+    padding: 0;
+    border: none;
+}
+
+input::-webkit-input-placeholder {
+    color: #ccc;
+}
+
+input::-ms-input-placeholder {
+    color: #ccc;
+}
+
+input::-moz-placeholder {
+    color: #ccc;
+}
+
+input[type=submit],
+input[type=button] {
+    cursor: pointer;
+}
+
+button[disabled],
+input[disabled] {
+    cursor: default;
+}
+
+.primary-btn {
+    font-size: 14px;
+    color: #fff;
+    height: 0.44rem;
+    padding: 0 0.15rem;
+    background-color: #0091FF;
+    border: 1px solid #0091FF;
+    line-height: 1.2;
+    text-align: center;
+    border-radius: 17px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    outline: none;
+    position: relative;
+}
+
+.primary-btn::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    border: inherit;
+    border-color: #000;
+    border-radius: inherit;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    content: ' ';
+}
+
+.primary-btn:active::before {
+    opacity: 0.1;
+}
+
+img {
+    border: none;
+    display: block;
+}
+
+ul,
+ol,
+li {
+    list-style-type: none;
+}
+
+
+/*公共方法*/
+
+.clear {
+    clear: both;
+}
+
+.clearleft {
+    clear: left;
+}
+
+.clearright {
+    clear: right;
+}
+
+.floatleft {
+    float: left;
+}
+
+.floatright {
+    float: right;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+
+/*背景及色值表*/
+
+.bg000 {
+    background: #000;
+}
+
+.color000 {
+    color: #000;
+}
