@@ -1384,32 +1384,28 @@
         document.getElementsByClassName('nav_a')[obj].style.color ='#fff'
         document.getElementsByClassName('nav_a')[obj].style.fontWeight ='Bold'
         if (obj == 1) {
+            window.location.href='core.html'
             document.getElementsByClassName('content_box')[0].style.display = 'none'
             document.getElementsByClassName('core')[0].style.display = 'block'
             document.getElementsByClassName('education')[0].style.display = 'none'
             document.getElementsByClassName('content')[0].style.display = 'block'
             document.getElementsByClassName('block_home')[0].style.display = 'block'  
-
-
-
         } else {
             if(obj == 0) {
+                window.location.href='home.html'
                 document.getElementsByClassName('core')[0].style.display = 'none'
                 document.getElementsByClassName('content_box')[0].style.display = 'block'
                 document.getElementsByClassName('content')[0].style.display = 'block'
                  document.getElementsByClassName('education')[0].style.display = 'none'
                  document.getElementsByClassName('home_content')[0].style.display = 'block'
                  document.getElementsByClassName('focus_news')[0].style.display = 'none'  
-                 document.getElementsByClassName('block_home')[0].style.display = 'block'  
-
-
-                 
+                 document.getElementsByClassName('block_home')[0].style.display = 'block'    
             }  else if (obj == 9 ){ 
+                window.location.href='study.html?code='+obj
                 document.getElementsByClassName('content')[0].style.display = 'none'
                 document.getElementsByClassName('education')[0].style.display = 'block'
             } else {
-                 console.log(obj)
-                 
+                window.location.href='menu.html?code='+obj
                  document.getElementsByClassName('block_home')[0].style.display = 'block'  
                 document.getElementsByClassName('core')[0].style.display = 'none'
                 document.getElementsByClassName('content_box')[0].style.display = 'block'

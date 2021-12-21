@@ -1293,6 +1293,13 @@
 </html>
 
 <script type="text/javascript ">
+    var url = location.search
+    var theRequest = new Object()
+    var code = ''
+    if(url.indexOf("?") !=-1) {
+        var str = url.substr(1)
+        var code = str.split("=")[1]
+    }
     var newInFo = document.getElementsByClassName("newInFo_item1")[0]
     newInFo.onmouseenter = function () {
             clearInterval(timer);
@@ -1308,9 +1315,17 @@
     }
     autoPlay()
     function setClass() {
-        document.getElementsByClassName('lineff')[0].style.display = 'block'
-        document.getElementsByClassName('colorLi')[0].style.background = '#0091FF '
-        document.getElementsByClassName('education')[0].style.display = 'none'
+        document.getElementsByClassName('lineff')[code].style.display = 'block'
+        // document.getElementsByClassName('colorLi')[code-2].style.background = '#0091FF '
+        // document.getElementsByClassName('education')[0].style.display = 'none'
+        // document.getElementsByClassName('content_box')[0].style.display = 'block'
+        // document.getElementsByClassName('content')[0].style.display = 'block'
+        // document.getElementsByClassName('core')[0].style.display = 'none'
+        // document.getElementsByClassName('home_content')[0].style.display = 'none'
+        // document.getElementsByClassName('focus_news')[0].style.display = 'block'
+        document.getElementsByClassName('content')[0].style.display = 'none'
+        document.getElementsByClassName('education')[0].style.display = 'block'
+
     }
     setClass()
     function next_pic (){
@@ -1354,6 +1369,7 @@
 
 
     function changeIndex(obj) {
+        console.log(obj)
         var item = document.getElementsByClassName('lineff')
         var nav = document.getElementsByClassName('nav_a')
         // 切换导航底部颜色
@@ -1374,6 +1390,7 @@
             window.location.href='core.html'
         } else {
             if(obj == 0) {
+                window.location.href='home.html'
                 document.getElementsByClassName('core')[0].style.display = 'none'
                 document.getElementsByClassName('content_box')[0].style.display = 'block'
                 document.getElementsByClassName('content')[0].style.display = 'block'
