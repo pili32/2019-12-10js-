@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./html2canvas"></script>
+    <script src="./jspdf.js"></script>
+    <script src="./print.min.js"></script>
+    <script src="./jquery.min.js"></script>
+
+
+    <title>Document</title>
+</head>
+<body>
+    <div class="right-asides">
+        <div class="canvas_box" >
+            <canvas id="canvas" width="498" height="682"></canvas>
+        </div>
+    </div>
+    <button onclick="generateCanvas(1)">下载</button>
+    <!-- <button onclick="generateCanvas(2)">打印</button> -->
+
+</body>
+</html>
+<script>
+      function creatDarw(w=498,h=682) { //创建画板
+        let c1 = document.querySelector('#canvas')
+        let ctx = c1.getContext('2d')
+        ctx.mozImageSmoothingEnabled = false;
+        ctx.webkitImageSmoothingEnabled = false;
+        ctx.msImageSmoothingEnabled = false;
+        ctx.imageSmoothingEnabled = false
+        var img = new Image();
+        img.src = "./certificate.jpg"
+        img.onload = function() {
+            ctx.drawImage(img,0,0,498,682)
+            ctx.font = " normal bold 24px 微软雅黑";
+            ctx.fillStyle = "#000";
+            ctx.fillText("张三",78,345);
+            ctx.font = "12px 微软雅黑";
+            ctx.fillText("2022　03　25",350,443);
+        }
+    }
+    creatDarw()
+
+    function convertCanvasToImage(canvas) {
+
+    }
+
+    function generateCanvas(num){
+        var target = document.querySelector('#canvas')
+        // target.print({
+        //     globalStyles:false
+        // });
+        
+        html2canvas(target, {
+            onrendered:function(canvas) {
+                // var img = new Image()
+                // img.src = require("./certificate.jpg")
+                var contentWidth = canvas.width;
+                var contentHeight = canvas.height;
+
+                //一页pdf显示html页面生成的canvas高度;
+                var pageHeight = contentWidth / 592.28 *841.89;
+                //未生成pdf的html页面高度
+                var leftHeight = contentHeight;
+                //页面偏移
+                var position = 0;
+                //a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
+                var imgWidth = 498;
+                var imgHeight = 682
+
+                // var pageData = canvas.toDataURL('jpg', 1.0);
+
+                var pdf = new jsPDF('', 'pt', [498,682]);  
+
+                //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
+                //当内容未超过pdf一页显示的范围，无需分页
+                if (leftHeight < pageHeight) {
+                    console.log(imgWidth)
+                    console.log(imgHeight)
+                    pdf.addImage(canvas, 'jpg', 0, 0, imgWidth, imgHeight );
+                } else {
+                    while(leftHeight > 0) {
+                        pdf.addImage(canvas, 'jpg', 0, position, imgWidth, imgHeight)
+                        leftHeight -= pageHeight;
+                        position -= 841.89;
+                        //避免添加空白页
+                        if(leftHeight > 0) {
+                            pdf.addPage();
+                        }
+                    }
+                }
+                // pdf.addPage();
+                if( num ==1 ) {
+                    console.log(canvas)
+
+                    pdf.save("证书.pdf");
+                } else {
+                    // window.print()
+                    // var win=window.open();
+                    // window.document.write(canvas);
+                    window.print();
+                    // window.location.reload()
+
+                }
+            }
+        })
+    }
+
+
+    // function print(num){
+    //     this.generateCanvas(num)
+    // };
+    // function dayin(num) {
+    //     this.generateCanvas(num)
+     
+    // }
+
+</script>
+
+<style>
+
+    .right-asides{
+        background:#fff;
+        padding-top: 100px;
+        box-sizing: border-box;
+
+    }
+    .canvas_box{
+        width: 498px;
+        height: 682px;
+        margin: auto;
+        /* background-image: url('./certificate.jpg'); */
+
+    }
+</style>

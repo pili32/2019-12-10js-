@@ -1,0 +1,5 @@
+@media screen and (min-width:240px){
+        html,body,input,select,textarea {
+            font-size: 9px !important;
+        }
+}
