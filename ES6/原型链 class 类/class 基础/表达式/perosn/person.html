@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+    function person () {
+        return new Promise( ( res,req) =>{
+            console.log(res)
+            setTimeout( () =>{
+                req("Ff")
+                res("Nihao")
+            },2000)
+        })
+    }
+    person().then ( (res) =>{
+        console.log(res)
+    }).catch( req =>{
+        console.log(req)
+
+    })
+</script>

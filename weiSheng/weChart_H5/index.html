@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Document</title> -->
+    <!-- <meta name="viewport" content="width=750,minimum-scale=0.5,maximum-scale=1.0,user-scalable=no, initial-scale=1.0" /> -->
+    <!-- <script src='./jquery.js'></script> -->
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <title>健康大培训</title>
+
+
+
+</head>
+
+<body>
+    <main>
+        
+    </main>
+
+</body>
+
+</html>
+
+
+
+<script>
+    (function() {
+        console.log(22)
+        var designW = 750; //设计稿宽
+        var font_rate = 100;
+        //适配
+        console.log(document.getElementsByTagName("html")[0])
+        document.getElementsByTagName("html")[0].style.fontSize = document.body.offsetWidth / designW * font_rate + "px";
+        document.getElementsByTagName("body")[0].style.fontSize = document.body.offsetWidth / designW * font_rate + "px";
+        //监测窗口大小变化
+        window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", function() {
+            document.getElementsByTagName("html")[0].style.fontSize = document.body.offsetWidth / designW * font_rate + "px";
+            document.getElementsByTagName("body")[0].style.fontSize = document.body.offsetWidth / designW * font_rate + "px";
+
+        }, false);
+
+        var ajax = new XMLHttpRequest();
+        //步骤二:设置请求的url参数,参数一是请求的类型,参数二是请求的url,可以带参数,动态的传递参数starName到服务端
+        ajax.open('get', 'http://kspx.hbwsrc.cn/api/publicServer/syslogins/getSignature?url=http://kspx.hbwsrc.cn/m/index.html');
+        //步骤三:发送请求
+        ajax.send();
+        //步骤四:注册事件 onreadystatechange 状态改变就会调用
+        ajax.onreadystatechange = function() {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                //步骤五 如果能够进到这个判断 说明 数据 完美的回来了,并且请求的页面是存在的
+                let data = JSON.parse(ajax.responseText);
+                wx.config({
+                    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印
+                    appId: 'wx7ad6fbfcc5a86b73', // 必填，公众号的唯一标识
+                    timestamp: data.data.timestamp, // 必填，生成签名的时间戳
+                    nonceStr: data.data.noncestr, // 必填，生成签名的随机串
+                    signature: data.data.signature, // 必填，签名
+                    jsApiList: ['chooseImage'], // 必填，需要使用的JS接口列表
+                    openTagList: ['wx-open-launch-weapp'] // 可选，需要使用的开放标签列表，例如['wx-open-launch-app']
+                });　　
+                //  大平台 wxa899316691afa366    // 卫生wx7ad6fbfcc5a86b73
+
+            }
+
+        }
+
+
+    })();
+
+    getCode()
+
+    var checkId, wxData, newId, oldId, checkType = ''
+    let index = 0
+    let chexkObj = {}
+
+    function getCode() {
+        var ajax = new XMLHttpRequest()
+        ajax.open('get', 'https://yj.whpyinfo.com:8083/publicServer/sysDict/queryDictArrayByPid/117')
+        ajax.send()
+        ajax.onreadystatechange = function() {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                //步骤五 如果能够进到这个判断 说明 数据 完美的回来了,并且请求的页面是存在的
+                　　　　
+                let {
+                    data
+                } = JSON.parse(ajax.responseText)
+                let flag = 0
+                for (var i = 0; i < data.length; i++) {
+                    var div_child1 = `<div id="div_child_1"onclick="changeCode(${data[i].id})" >${data[i].title}</div>`
+                    var div_child2 = `<div id="div_child_1"onclick="changeCode(${data[i].id})" >${data[i].title}</div>`
+                    flag += 1
+                    if ((flag % 2) == 1) {
+                        $("#box").append(div_child1);
+                    } else {
+                        $("#box1").append(div_child2);
+                    }　　
+                }
+
+            }
+        }
+    }
+
+    function changeCode(id) {
+        chexkObj = {
+            parentId: id,
+            childId: '',
+        }
+        var ajax = new XMLHttpRequest()
+        ajax.open('get', 'https://yj.whpyinfo.com:8083/publicServer/sysDict/queryDictArrayByPid/' + id)
+        ajax.send()
+        ajax.onreadystatechange = function() {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                //步骤五 如果能够进到这个判断 说明 数据 完美的回来了,并且请求的页面是存在的
+                $("#actionSheet").css('display', 'block')
+                $("#actionSheet").css('transition', '.5s')　
+                $("#actionSheet").css('height', '7rem')　　　　　　　　　　　　　　　
+                let {
+                    data
+                } = JSON.parse(ajax.responseText)
+                let flag = 0
+                for (var i = 0; i < data.length; i++) {
+                    var child = `<div id="child${data[i].id}" name="child${data[i].id}" onclick="changeItem(${data[i].id},${data[i].description})" >${data[i].title}</div>`
+                    var child1 = `<div id="child${data[i].id}" name="child${data[i].id}" onclick="changeItem(${data[i].id},${data[i].description})" >${data[i].title}</div>`
+                    if ((i % 2) == 0) {
+                        $("#item").append(child);
+                    } else {
+                        $("#item1").append(child1);
+                    }　　
+                }
+            }
+        }
+    }
+
+    function changeItem(id, type) {　　　
+        checkType = type　　　　
+        chexkObj = {
+            childId: id,
+        }　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
+        if (!index) { //为0
+            index++
+            newId = id
+            $("#child" + id).css('color', '#fff')　
+            $("#child" + id).css('background', '#009BF0')　　
+
+            if (oldId) {
+                $("#child" + oldId).css('color', '#000')　
+                $("#child" + oldId).css('background', '#E1EBF6')　
+            }　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
+        } else {
+            index = 0　　　　　　　　　　　　　　　　　　　　　　　　
+            oldId = id
+            $("#child" + newId).css('color', '#000')　
+            $("#child" + newId).css('background', '#E1EBF6')　　
+            index = 0
+            $("#child" + id).css('color', '#fff')　
+            $("#child" + id).css('background', '#009BF0')　
+        }　　　　　　　　　　　　　　　　　　　　　　　　　
+        // $(".btn")[0].attr("disabled", false)
+        $('#launch-btn').attr({
+            path: 'pages/login/index?type=' + checkId
+        })
+        $('#launch-btn1').attr({
+            path: 'pages/index/index'
+        })
+        $("#btn_btn").css('display', 'block')　
+
+        $("#btn_box").css('display', 'none')　
+        $("#btn_box1").css('display', 'none')　
+
+        // if (type) {
+        //     $("#btn_box").css('display', 'none')　
+        //     $("#btn_box1").css('display', 'block')　
+        // } else {
+        //     $("#btn_box").css('display', 'block')　
+        //     $("#btn_box1").css('display', 'none')
+        // }
+
+        checkId = id
+        console.log(checkId)
+    }
+
+    function clickBtn() {
+        console.log(chexkObj)
+        if (!checkId) {
+            alert('请选择机构类型')
+        } else {
+            $("#btn_btn").css('display', 'none')　
+            if (checkType) {
+                $("#btn_box").css('display', 'none')　
+                $("#btn_box1").css('display', 'block')　
+            } else {
+                $("#btn_box").css('display', 'block')　
+                $("#btn_box1").css('display', 'none')
+            }
+
+        }
+
+    }
+
+    function closeSheet() {
+        $('#actionSheet').css('display', 'none')
+        $("#btn_btn").css('display', 'block')　
+        $("#btn_box").css('display', 'none')　
+        $("#btn_box1").css('display', 'none')
+        $('#item').empty()
+        $('#item1').empty()
+        checkId = ''
+
+    }
+</script>
+
+<style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    /*     
+    @media screen and (min-width: 640px) {
+        main {
+            background: red;
+        }
+    }
+    
+    @media screen and (min-width: 320px) {} */
+    
+    main {
+        width: 7.5rem;
+        height: 13.6rem;
+        margin: auto;
+        background-image: url(./image/bac2.png);
+        background-size: 100% 100%;
+        position: relative;
+    }
+    
+    #actionSheet {
+        width: 100%;
+        position: absolute;
+        height: 0;
+        background: #fff;
+        display: none;
+        border-top-left-radius: 0.24rem;
+        border-top-right-radius: 0.24rem;
+        bottom: 0;
+        font-size: 0.4rem;
+    }
+    
+    button {
+        width: 3rem;
+        line-height: 0.8rem;
+        background: #009BF0;
+        font-size: 0.3rem;
+        border: 0;
+        color: #fff;
+    }
+    
+    .actionSheet_header {
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .actionSheet_header div:last-child {
+        width: 1rem;
+    }
+    
+    .actionSheet_header div:first-child {
+        width: calc( 100% - 1rem);
+        text-align: center;
+    }
+    
+    .actionSheet_header span {
+        line-height: 1rem;
+    }
+    
+    #close {
+        padding-top: 0.2rem;
+        box-sizing: border-box;
+        position: relative;
+        height: 1rem;
+    }
+    
+    #close img {
+        width: 18px;
+        height: 18px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        margin: auto;
+    }
+    
+    .actionSheet span {
+        text-align: center;
+        line-height: 1rem;
+        font-size: 0.4rem;
+    }
+    
+    .main_body {
+        width: 7rem;
+        position: absolute;
+        bottom: 0.24rem;
+        left: 0;
+        right: 0;
+        background: #fff;
+        height: 7.43rem;
+        margin: auto;
+        border-radius: 0.24rem;
+    }
+    
+    .header {
+        width: 100%;
+        height: 0.9rem;
+        position: relative;
+        font-family: PingFang-SC-Bold;
+    }
+    
+    .header div {
+        width: 6.5rem;
+        height: 100%;
+        background-image: url(./image/bac1.png);
+        background-size: 100% 100%;
+        margin: auto;
+        position: absolute;
+        top: -1rem;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    
+    #btn_btn {
+        text-align: center;
+        margin-top: .5rem;
+    }
+    
+    .btn_btn button {
+        border-radius: 6px;
+    }
+    
+    .header div {
+        text-align: center;
+        line-height: 0.9rem;
+        font-size: 0.36rem;
+        color: #F2F8FF;
+    }
+    
+    .content {
+        /* margin-top: 1.52rem; */
+        height: 6.5rem;
+        /* margin: auto; */
+        display: flex;
+        flex-direction: row;
+        line-height: 0.74rem;
+        text-align: center;
+        color: #009BF0;
+        overflow-y: scroll;
+        padding-top: .2rem;
+        padding-bottom: .4rem;
+        box-sizing: border-box;
+        font-size: 0.25rem;
+    }
+    
+    #box {
+        width: 50%;
+        padding: 0.2rem 0.2rem;
+        box-sizing: border-box;
+    }
+    
+    #item {
+        width: 50%;
+        padding: 0.2rem 0.2rem;
+        /* justify-content: space-around; */
+        color: #151515;
+        font-size: 0.25rem;
+    }
+    
+    #item1 {
+        width: 50%;
+        padding: 0.2rem 0.22rem;
+        /* justify-content: space-around; */
+        color: #151515;
+        font-size: 0.25rem;
+    }
+    
+    #box1 {
+        width: 50%;
+        padding: 0.2rem 0.2rem;
+    }
+    
+    #item div {
+        width: 100%;
+        /* height: 0.74rem; */
+        font-weight: 600;
+        background: #E1EBF6;
+        margin-top: 0.2rem;
+    }
+    
+    #item1 div {
+        width: 100%;
+        /* height: 0.74rem; */
+        font-weight: 600;
+        background: #E1EBF6;
+        margin-top: 0.2rem;
+    }
+    
+    #box div {
+        width: 100%;
+        border: 1px solid #009BF0;
+        font-weight: 600;
+        margin: 0.2rem 0;
+    }
+    
+    #box1 div {
+        width: 100%;
+        border: 1px solid #009BF0;
+        font-weight: 600;
+        margin: 0.2rem 0;
+    }
+    /*     
+    #item1 div {
+        width: 100%;
+        height: 7.4rem;
+        border: 1px solid #009BF0;
+        font-weight: 600;
+    }
+    
+    #item div {
+        width: 100%;
+        height: 7.4rem;
+        border: 1px solid #009BF0;
+        font-weight: 600;
+    } */
+    
+    #btn_box {
+        width: 100%;
+        text-align: center;
+        height: 1rem;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        display: none;
+    }
+    
+    #btn_box1 {
+        width: 100%;
+        text-align: center;
+        height: 1rem;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        display: none;
+    }
+    
+    #btn_box1 wx-open-launch-weapp {
+        position: absolute;
+        /* top: ; */
+        left: 0;
+        right: 0;
+        bottom: 0px;
+        top: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: .5rem;
+        margin: auto;
+    }
+    
+    #btn_box wx-open-launch-weapp {
+        position: absolute;
+        /* top: ; */
+        left: 0;
+        right: 0;
+        bottom: 0px;
+        top: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: .5rem;
+        margin: auto;
+    }
+</style>

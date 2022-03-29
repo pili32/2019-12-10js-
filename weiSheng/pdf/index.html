@@ -4,27 +4,93 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./html2canvas"></script>
-    <script src="./jspdf.js"></script>
-    <script src="./print.min.js"></script>
-    <script src="./jquery.min.js"></script>
-
-
-    <title>Document</title>
+    <!-- <title>Document</title> -->
+    <!-- <meta name="viewport" content="width=750,minimum-scale=0.5,maximum-scale=1.0,user-scalable=no, initial-scale=1.0" /> -->
+    <!-- <script src='./jquery.js'></script> -->
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <title>证书查询</title>
+    <script src="./global/html2canvas.js"></script>
+    <script src="./global/jspdf.js"></script>
+    <script src="./global/print.min.js"></script>
+    <script src="./global/jquery.min.js"></script>
 </head>
 <body>
-    <div class="right-asides">
+    <main>
+        <header>
+            <img src="./image/haeder.png" alt="">
+        </header>
+       <div class="box">
+            <div class="box-none">
+               <div class="box-none-img"> 
+                    <img src="./image/time.png" alt="">
+                </div>
+                <span>证书查询4月21日开放，敬请等待</span>
+
+            </div>
+
+       </div>
+       <footer>4月21日后，“疫情防控知识大培训”线上培训考核合格的学员可申领培训合格证书。</footer>
+
+
+    </main>
+
+    <!-- <div class="right-asides">
         <div class="canvas_box" >
             <canvas id="canvas" width="498" height="682"></canvas>
         </div>
     </div>
-    <button onclick="generateCanvas(1)">下载</button>
+    <button onclick="generateCanvas(1)">下载</button> -->
     <!-- <button onclick="generateCanvas(2)">打印</button> -->
 
 </body>
 </html>
 <script>
-      function creatDarw(w=498,h=682) { //创建画板
+     (function() {
+        var designW = 750; //设计稿宽
+        var font_rate = 100;
+        //适配
+        console.log(document.getElementsByTagName("html")[0])
+        document.getElementsByTagName("html")[0].style.fontSize = document.body.offsetWidth / designW * font_rate + "px";
+        document.getElementsByTagName("body")[0].style.fontSize = document.body.offsetWidth / designW * font_rate + "px";
+        //监测窗口大小变化
+        window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", function() {
+        document.getElementsByTagName("html")[0].style.fontSize = document.body.offsetWidth / designW * font_rate + "px";
+        document.getElementsByTagName("body")[0].style.fontSize = document.body.offsetWidth / designW * font_rate + "px";
+
+        }, false);
+
+        // var ajax = new XMLHttpRequest();
+        // //步骤二:设置请求的url参数,参数一是请求的类型,参数二是请求的url,可以带参数,动态的传递参数starName到服务端
+        // ajax.open('get', 'http://kspx.hbwsrc.cn/api/publicServer/syslogins/getSignature?url=http://kspx.hbwsrc.cn/m/index.html');
+        // //步骤三:发送请求
+        // ajax.send();
+        // //步骤四:注册事件 onreadystatechange 状态改变就会调用
+        // ajax.onreadystatechange = function() {
+        //     if (ajax.readyState == 4 && ajax.status == 200) {
+        //         //步骤五 如果能够进到这个判断 说明 数据 完美的回来了,并且请求的页面是存在的
+        //         let data = JSON.parse(ajax.responseText);
+        //         wx.config({
+        //             debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印
+        //             appId: 'wx7ad6fbfcc5a86b73', // 必填，公众号的唯一标识
+        //             timestamp: data.data.timestamp, // 必填，生成签名的时间戳
+        //             nonceStr: data.data.noncestr, // 必填，生成签名的随机串
+        //             signature: data.data.signature, // 必填，签名
+        //             jsApiList: ['chooseImage'], // 必填，需要使用的JS接口列表
+        //             openTagList: ['wx-open-launch-weapp'] // 可选，需要使用的开放标签列表，例如['wx-open-launch-app']
+        //         });　　
+        //         //  大平台 wxa899316691afa366    // 卫生wx7ad6fbfcc5a86b73
+
+        //     }
+
+        // }
+
+
+    })();
+
+
+    function creatDarw(w=498,h=682) { //创建画板
         let c1 = document.querySelector('#canvas')
         let ctx = c1.getContext('2d')
         ctx.mozImageSmoothingEnabled = false;
@@ -42,11 +108,7 @@
             ctx.fillText("2022　03　25",350,443);
         }
     }
-    creatDarw()
-
-    function convertCanvasToImage(canvas) {
-
-    }
+    // creatDarw()
 
     function generateCanvas(num){
         var target = document.querySelector('#canvas')
@@ -121,10 +183,73 @@
 </script>
 
 <style>
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    main {
+        width: 7.5rem;
+        height:100%;
+        margin: auto;
+        position: relative;
+    }
+    footer{
+        width: 7.5rem;
+        height: .67rem;
+        position: absolute;
+        bottom: 0.66rem;
+        font-size: 0.28rem;
+        color: #999999;
+        padding: 0 0.4rem;
+        box-sizing: border-box;
 
+    }
+    .box{
+        width: 7.5rem;
+        height: calc( 100% - 3.12rem);
+        position: relative;
+    }
+    .box-none{
+        width: 7.5rem;
+        height: 4rem;
+        position: absolute;
+        margin: auto;
+        top: 0;left: 0;bottom: 0;right: 0;
+        text-align: center;
+        font-family: PingFang-SC-Regular;
+        background: #fff;
+    }
+    .box-none-img{
+        width: 2.23rem;
+        height: 2.07rem;
+        margin: auto;
+    }
+    .box-none span {
+        color: #333333;
+        font-size: 0.28rem;
+    }
+    .box-none img {
+        width:100%;
+        height: 100%;
+    }
+    header{
+        width: 7.02rem;
+        height: 1.76rem;
+        margin: auto;
+
+    }
+    header img{
+        width: 100%;
+        height: 100%;
+    }
+    
+    
     .right-asides{
         background:#fff;
-        padding-top: 100px;
+        padding-top: 1rem;
         box-sizing: border-box;
 
     }
