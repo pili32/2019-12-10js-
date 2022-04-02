@@ -17,10 +17,8 @@
     <script src="./global/jquery.min.js"></script>
 </head>
 <body>
-    <main>
-        <header>
-            <img src="./image/haeder.png" alt="">
-        </header>
+    <main class="Mobile">
+        <header></header>
        <div class="box">
             <div class="box-none">
                <div class="box-none-img"> 
@@ -29,99 +27,263 @@
                 <span>证书查询4月21日开放，敬请等待</span>
 
             </div>
-
+            <div class="box-block">
+                <div>
+                    <input class="name" name="data-name" placeholder="请输入姓名" />
+                </div>
+                <div>
+                    <input class="id-card"  name="data-card" placeholder="请输入身份证号"/>
+                </div>
+                <div class="button-btn">
+                    <button onclick="search(true)">查询</button>
+                </div>
+            </div>
+            <footer>4月21日后，“疫情防控知识大培训”线上培训考核合格的学员可申领培训合格证书。</footer>
        </div>
-       <footer>4月21日后，“疫情防控知识大培训”线上培训考核合格的学员可申领培训合格证书。</footer>
+       <div class="right-asides">
+            <div class="canvas_box" >
+                <canvas id="canvas" style="width:100%;height:100%"></canvas>
+            </div>
+        </div>
+        <button onclick="generateCanvas(1)">下载</button>
 
 
     </main>
 
-    <!-- <div class="right-asides">
+    <main class="Desktop">
+        <header></header>
+       <div class="box">
+            <div class="box-none">
+               <div class="box-none-img"> 
+                    <img src="./image/time.png" alt="">
+                </div>
+                <span>证书查询4月21日开放，敬请等待</span>
+            </div>
+            <div class="box-block">
+                <div>
+                    <input class="name" name="data-nickName" placeholder="请输入姓名" />
+                </div>
+                <div>
+                    <input class="id-card"  name="data-idCard" placeholder="请输入身份证号"/>
+                </div>
+                <div class="button-btn">
+                    <button onclick="search(false)">查询</button>
+                </div>
+            </div>
+            <footer>4月21日后，“疫情防控知识大培训”线上培训考核合格的学员可申领培训合格证书。</footer>
+       </div>
+       <div class="right-asides">
         <div class="canvas_box" >
-            <canvas id="canvas" width="498" height="682"></canvas>
+            <canvas id="canvas1"width="498" height="682"></canvas>
         </div>
     </div>
-    <button onclick="generateCanvas(1)">下载</button> -->
+    <button onclick="generateCanvas(1)">下载</button>
+    </main>
     <!-- <button onclick="generateCanvas(2)">打印</button> -->
-
 </body>
 </html>
 <script>
+    var canvasShow = '';
      (function() {
-        var designW = 750; //设计稿宽
-        var font_rate = 100;
-        //适配
-        console.log(document.getElementsByTagName("html")[0])
-        document.getElementsByTagName("html")[0].style.fontSize = document.body.offsetWidth / designW * font_rate + "px";
-        document.getElementsByTagName("body")[0].style.fontSize = document.body.offsetWidth / designW * font_rate + "px";
-        //监测窗口大小变化
-        window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", function() {
-        document.getElementsByTagName("html")[0].style.fontSize = document.body.offsetWidth / designW * font_rate + "px";
-        document.getElementsByTagName("body")[0].style.fontSize = document.body.offsetWidth / designW * font_rate + "px";
+         
+        var machineType = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop'
+        if (machineType === 'Mobile')    {
+            console.log('移动端');
+            $(".Desktop").css('display', 'none')
+            var designW = 750; //设计稿宽
+            var font_rate = 100;
+            //适配
+            console.log(document.getElementsByTagName("html")[0])
+            document.getElementsByTagName("html")[0].style.fontSize = document.body.offsetWidth / designW * font_rate + "px";
+            document.getElementsByTagName("body")[0].style.fontSize = document.body.offsetWidth / designW * font_rate + "px";
+            //监测窗口大小变化
+            window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", function() {
+            document.getElementsByTagName("html")[0].style.fontSize = document.body.offsetWidth / designW * font_rate + "px";
+            document.getElementsByTagName("body")[0].style.fontSize = document.body.offsetWidth / designW * font_rate + "px";
 
-        }, false);
+            }, false);
 
-        // var ajax = new XMLHttpRequest();
-        // //步骤二:设置请求的url参数,参数一是请求的类型,参数二是请求的url,可以带参数,动态的传递参数starName到服务端
-        // ajax.open('get', 'http://kspx.hbwsrc.cn/api/publicServer/syslogins/getSignature?url=http://kspx.hbwsrc.cn/m/index.html');
-        // //步骤三:发送请求
-        // ajax.send();
-        // //步骤四:注册事件 onreadystatechange 状态改变就会调用
-        // ajax.onreadystatechange = function() {
-        //     if (ajax.readyState == 4 && ajax.status == 200) {
-        //         //步骤五 如果能够进到这个判断 说明 数据 完美的回来了,并且请求的页面是存在的
-        //         let data = JSON.parse(ajax.responseText);
-        //         wx.config({
-        //             debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印
-        //             appId: 'wx7ad6fbfcc5a86b73', // 必填，公众号的唯一标识
-        //             timestamp: data.data.timestamp, // 必填，生成签名的时间戳
-        //             nonceStr: data.data.noncestr, // 必填，生成签名的随机串
-        //             signature: data.data.signature, // 必填，签名
-        //             jsApiList: ['chooseImage'], // 必填，需要使用的JS接口列表
-        //             openTagList: ['wx-open-launch-weapp'] // 可选，需要使用的开放标签列表，例如['wx-open-launch-app']
-        //         });　　
-        //         //  大平台 wxa899316691afa366    // 卫生wx7ad6fbfcc5a86b73
+        } else    {
+            console.log('Pc端',machineType);
+            $(".Mobile").css('display', 'none')
 
-        //     }
-
-        // }
-
-
+            }
+            $(".box-none").css('display', 'none')
+            creatDarw(machineType)
     })();
+    
 
+    $("input").focus(function(){
+        $("footer").css('display', 'none')　
+    });
+    $("input").blur(function(){
+        $("footer").css('display', 'block')　
+    });
+    //查询
+    function search (state) {
+        $(".box").css('display', 'none')
 
-    function creatDarw(w=498,h=682) { //创建画板
-        let c1 = document.querySelector('#canvas')
+            let name ,idCard = ''
+            if(state) {
+                name = $("input[name='data-name']").val()
+                idCard = $("input[name='data-card']").val()
+            } else {
+                name = $("input[name='data-nickName']").val()
+                idCard = $("input[name='data-idCard']").val()
+            }
+            
+            console.log(name)
+            console.log(idCard)
+            let flag = false
+            // if(!name) {
+            //     alert("请输入姓名")
+            //     flag = false
+            //     return
+            // }
+            if( !idCard) {
+                alert("请输入身份证号码")
+                return
+            } else {
+                if(!this.checkIDCard(idCard)) {
+                    alert("身份证号码不正确")
+                    return
+                } else {
+                    flag = true
+                }
+            }
+            if(flag){
+                getAjax(name,idCard).then( res =>{
+                    if (!res.data) {
+                        alert("没有查询到证书，请确认 '疫情防控知识大培训'线上培训考试成绩是否合格。 ")
+                    } else {
+                    }
+                }).catch(req =>{
+                    console.log(req)
+                    alert(req.data.value)
+                })
+            }
+    }
+
+    function getAjax(name,idCard){
+        let result = new Promise( ( res,req) =>{
+            let  ajax = new XMLHttpRequest();
+            ajax.open('get', `https://kspx.hbwsrc.cn:8083/wxApplets/getStudyFinish?idCard=${idCard}`);
+            ajax.send()
+            ajax.onreadystatechange = function() {
+                let data = JSON.parse(ajax.response)
+                    if (ajax.readyState == 4 && ajax.status == 200) {
+                        if(data.code == 200 ) {
+                           res(data)
+                        } else if ( data.code == 201 ) {
+                            req(data)
+                        }
+                    }
+                }
+        })
+        return result
+    } 
+    function checkIDCard(idcode) {
+        let weight_factor = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2]
+        // 校验码
+        let check_code = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2']
+
+        let code = idcode + ''
+        let last = idcode[17] // 最后一位
+
+        let seventeen = code.substring(0, 17)
+
+        // ISO 7064:1983.MOD 11-2
+        // 判断最后一位校验码是否正确
+        let arr = seventeen.split('')
+        let len = arr.length
+        let num = 0
+        for (let i = 0; i < len; i++) {
+            num = num + arr[i] * weight_factor[i]
+        }
+
+        // 获取余数
+        let resisue = num % 11
+        let last_no = check_code[resisue]
+
+        // 格式的正则
+        // 正则思路
+        /*
+                    第一位不可能是0
+                    第二位到第六位可以是0-9
+                    第七位到第十位是年份，所以七八位为19或者20
+                    十一位和十二位是月份，这两位是01-12之间的数值
+                    十三位和十四位是日期，是从01-31之间的数值
+                    十五，十六，十七都是数字0-9
+                    十八位可能是数字0-9，也可能是X
+                    */
+        let idcard_patter =
+            /^[1-9][0-9]{5}([1][9][0-9]{2}|[2][0][0|1][0-9])([0][1-9]|[1][0|1|2])([0][1-9]|[1|2][0-9]|[3][0|1])[0-9]{3}([0-9]|[X])$/
+
+        // 判断格式是否正确
+        let format = idcard_patter.test(idcode)
+
+        // 返回验证结果，校验码和格式同时正确才算是合法的身份证号码
+        return last === last_no && format ? true : false;
+    }
+    function creatDarw(machineType,w=498,h=682) { //创建画板
+        canvasShow = machineType
+        let c1 = ''
+        let  winWidth = ''
+        let winHeight = ''
+        if( machineType == 'Desktop') {
+         c1 = document.querySelector('#canvas1')
+         winWidth = 498
+         winHeight = 682
+
+        } else {
+         c1 = document.querySelector('#canvas')
+          winWidth = canvas.width;
+         winHeight = canvas.height;
+
+        }
         let ctx = c1.getContext('2d')
-        ctx.mozImageSmoothingEnabled = false;
-        ctx.webkitImageSmoothingEnabled = false;
-        ctx.msImageSmoothingEnabled = false;
-        ctx.imageSmoothingEnabled = false
+        // ctx.mozImageSmoothingEnabled = false;
+        // ctx.webkitImageSmoothingEnabled = false;
+        // ctx.msImageSmoothingEnabled = false;
+        // ctx.imageSmoothingEnabled = false
+        var type =['repeat']
         var img = new Image();
         img.src = "./certificate.jpg"
+    
+        console.log(winWidth)
+        console.log(winHeight)
+
         img.onload = function() {
-            ctx.drawImage(img,0,0,498,682)
+            ctx.drawImage(img,0,0,winWidth,winHeight)
             ctx.font = " normal bold 24px 微软雅黑";
-            ctx.fillStyle = "#000";
+            // ctx.fillStyle = "#000";
             ctx.fillText("张三",78,345);
             ctx.font = "12px 微软雅黑";
             ctx.fillText("2022　03　25",350,443);
+            ctx.fillStyle = ctx.createPattern(img, type[0])
         }
     }
-    // creatDarw()
 
     function generateCanvas(num){
+        console.log(canvasShow)
+        var contentWidth ,contentHeight ,target=""
+        if( canvasShow == 'Desktop') {
+        target = document.querySelector('#canvas1')
+        } else {
         var target = document.querySelector('#canvas')
-        // target.print({
-        //     globalStyles:false
-        // });
+        }
         
         html2canvas(target, {
             onrendered:function(canvas) {
+                if( canvasShow == 'Desktop') {
+                    contentWidth = 498
+                    contentHeight = 682
+                } else {
+                    contentWidth = canvas.width;
+                    contentHeight = canvas.height;
+                }
                 // var img = new Image()
                 // img.src = require("./certificate.jpg")
-                var contentWidth = canvas.width;
-                var contentHeight = canvas.height;
 
                 //一页pdf显示html页面生成的canvas高度;
                 var pageHeight = contentWidth / 592.28 *841.89;
@@ -190,13 +352,14 @@
         margin: 0;
         padding: 0;
     }
-    main {
+    .Mobile {
         width: 7.5rem;
         height:100%;
         margin: auto;
         position: relative;
     }
-    footer{
+ 
+    .Mobile footer{
         width: 7.5rem;
         height: .67rem;
         position: absolute;
@@ -207,12 +370,29 @@
         box-sizing: border-box;
 
     }
-    .box{
+
+    .Mobile input {
+        width: 5rem;
+        line-height: .5rem;
+    }
+
+    .Mobile .button-btn button {
+        width: 5rem;
+        height: 1rem;
+        background:#1D6BD6 ;
+        border: 1px solid #1D6BD6;
+        color: #fff;
+        font-size: .40rem;
+        border-radius: 25px;
+    }
+
+    .Mobile .box{
         width: 7.5rem;
-        height: calc( 100% - 3.12rem);
+        height: calc( 100% - 1.76rem);
         position: relative;
     }
-    .box-none{
+
+    .Mobile .box-none{
         width: 7.5rem;
         height: 4rem;
         position: absolute;
@@ -222,42 +402,138 @@
         font-family: PingFang-SC-Regular;
         background: #fff;
     }
-    .box-none-img{
+
+    .Mobile .box-block{
+        width: 7.5rem;
+        height: 5rem;
+        position: absolute;
+        margin: auto;
+        top: 0;left: 0;bottom: 0;right: 0;
+        text-align: center;
+        font-family: PingFang-SC-Regular;
+        background: #ddd;
+    }
+
+    .Mobile .box-none-img{
         width: 2.23rem;
         height: 2.07rem;
         margin: auto;
     }
-    .box-none span {
+
+    .Mobile .box-none span {
         color: #333333;
         font-size: 0.28rem;
     }
-    .box-none img {
+
+    .Mobile .box-none img {
         width:100%;
         height: 100%;
     }
-    header{
+      
+
+    .Mobile header{
         width: 7.02rem;
         height: 1.76rem;
         margin: auto;
-
+        background-image: url(./image/haeder.png);
+        background-size:100%
     }
-    header img{
-        width: 100%;
-        height: 100%;
-    }
-    
-    
-    .right-asides{
+    /* .Desktop  */
+    .Mobile .right-asides{
         background:#fff;
         padding-top: 1rem;
         box-sizing: border-box;
-
+        width: 100%;
+        height: 6.82rem;
     }
-    .canvas_box{
-        width: 498px;
-        height: 682px;
+    .Mobile .canvas_box{
         margin: auto;
-        /* background-image: url('./certificate.jpg'); */
-
+        width: 4.98rem;
+        height: 100%;
+    }
+    /* PC端 */
+       .Desktop {
+        width: 702px;
+        height:100%;
+        margin: auto;
+        position: relative;
+    }
+    .Desktop  footer {
+        width: 702px;
+        /* height: 67px; */
+        position: absolute;
+        bottom: 66px;
+        font-size:28px;
+        color: #999999;
+        padding: 40px;
+        box-sizing: border-box;
+    }
+    .Desktop .canvas_box{
+        margin: auto;
+        width: 498px;
+        height: 100%;
+    }
+    .Desktop input {
+        width: 500px;
+        line-height: 50px;
+    }
+    .Desktop .button-btn  {
+        margin-top: 50px;
+    }
+    .Desktop .button-btn button {
+        width: 500px;
+        height: 100px;
+        background:#1D6BD6 ;
+        border: 1px solid #1D6BD6;
+        color: #fff;
+        font-size: 40px;
+        border-radius: 25px;
+    }
+    .Desktop .box {
+        width:702px;
+        height: 870px;
+        position: relative;
+        margin-top:50px ;
+    }
+    .Desktop .box-none {
+        width: 702px;
+        height: 600px;
+        position: absolute;
+        margin: auto;
+        top: 0;left: 0;bottom: 0;right: 0;
+        text-align: center;
+        font-family: PingFang-SC-Regular;
+        background: #fff;
+    }
+    .Desktop .box-none-img {
+        width: 233px;
+        height: 207px;
+        margin: auto;
+    }
+    .Desktop  .box-block {
+        width: 702px;
+        height: 200px;
+        text-align: center;
+        font-family: PingFang-SC-Regular;
+        background: #ddd;
+        padding-top: 50px;
+    }
+    .Desktop  .box-block  div {
+        height: 100px;
+    }
+    .Desktop .box-none span {
+        color: #333333;
+        font-size:28px;
+    }
+    .Desktop  .box-none-img{
+        width: 223px;
+        height: 207px;
+        margin: auto;
+    }
+    .Desktop  header {
+        width: 702px;
+        height: 176px;
+        margin: auto;
+        background-image: url(./image/haeder.png);
     }
 </style>
