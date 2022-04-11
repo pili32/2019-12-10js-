@@ -4,17 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <title>Document</title> -->
-    <!-- <meta name="viewport" content="width=750,minimum-scale=0.5,maximum-scale=1.0,user-scalable=no, initial-scale=1.0" /> -->
-    <!-- <script src='./jquery.js'></script> -->
     <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0">
     <title>证书查询</title>
     <script src="./global/html2canvas.js"></script>
     <script src="./global/jspdf.js"></script>
-    <script src="./global/print.min.js"></script>
     <script src="./global/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./global/index.css" />
 </head>
 <body>
     <main class="Mobile">
@@ -28,24 +25,73 @@
 
             </div>
             <div class="box-block">
-                <div>
-                    <input class="name" name="data-name" placeholder="请输入姓名" />
+                <div class="input">
+                    <div class="input-img">
+                        <img src="./image/name.png" alt="">
+                    </div>
+                    <div class="input-name">
+                        <input class="name" name="data-name" placeholder="请输入姓名" />
+                    </div>
                 </div>
-                <div>
-                    <input class="id-card"  name="data-card" placeholder="请输入身份证号"/>
+                <div class="input">
+                    
+                    <div class="input-img">
+                        <img src="./image/idcard.png" alt="">
+                    </div>
+                    <div class="input-name" style="width:75%">
+                        <input class="id-card" name="data-card" style="width:100%" placeholder="请输入身份证号"/>
+                        <div class="close"  onclick="deletes()">
+                            <img src="./image/close.png" alt="">
+                        </div>
+                    </div>        
+                </div>
+                <div class="warning">
+                    <div class="warning-box">
+                        <div class="warning-item">
+                            <img src="./image/war.png" alt="">
+                        </div>
+                        <div class="warning-item">
+                            <span class="span-text"></span>
+                        </div> 
+                    </div> 
                 </div>
                 <div class="button-btn">
                     <button onclick="search(true)">查询</button>
+                </div>
+                <div class="search-warn">
+                    <div class="search-box">
+                        <div class="search-item">
+                            <img src="./image/war.png" alt="">
+                        </div>
+                        <div class="search-item">
+                            <span class="span-war"></span>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="warn-title">
+                    <span>请确认</span>
+                    <span class="title-tips">"湖北省新冠肺炎疫情防控大培训"</span>
+                    <span>线上考试成绩是 否合格。</span>
+                </div>
+                <div class="warn-title1">
+                    <span>可在</span>
+                    <span class="title-tips">"湖北省新冠肺炎疫情防控大培训"</span>
+                    <span>平台中的</span>
+                    <span class="title-tips">"个人信息"</span>
+                    <span>查看</span>
                 </div>
             </div>
             <footer>4月21日后，“疫情防控知识大培训”线上培训考核合格的学员可申领培训合格证书。</footer>
        </div>
        <div class="right-asides">
             <div class="canvas_box" >
-                <canvas id="canvas" style="width:100%;height:100%"></canvas>
+                <canvas id="canvas" style="background:#fff;width:100%;height:100%"></canvas>
+            </div>
+            <div class="canvas-btn">
+                <button class="download" onclick="generateCanvas()">保存证书</button>
             </div>
         </div>
-        <button onclick="generateCanvas(1)">下载</button>
 
 
     </main>
@@ -60,40 +106,84 @@
                 <span>证书查询4月21日开放，敬请等待</span>
             </div>
             <div class="box-block">
-                <div>
-                    <input class="name" name="data-nickName" placeholder="请输入姓名" />
+                <div class="input">
+                    <div class="input-img">
+                        <img class="img-name"   src="./image/name.png" alt="">
+                    </div>
+                    <div class="input-name">
+                        <input class="name" name="data-nickName" placeholder="请输入姓名" /> 
+                    </div>
                 </div>
-                <div>
-                    <input class="id-card"  name="data-idCard" placeholder="请输入身份证号"/>
+                <div class="input">
+                    <div class="input-img" >
+                        <img  class="input-img1" src="./image/idcard.png" alt="">
+                    </div>
+                    <div class="input-name">
+                        <input class="id-card"  name="data-idCard" placeholder="请输入身份证号"/>
+                        <div class="close"  onclick="deletes()">
+                            <img src="./image/close.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="warning">
+                    <div class="warning-box">
+                        <div class="warning-item">
+                            <img src="./image/war.png" alt="">
+                        </div>
+                        <div class="warning-item">
+                            <span class="span-text"></span>
+                        </div> 
+                    </div> 
                 </div>
                 <div class="button-btn">
                     <button onclick="search(false)">查询</button>
+                </div>
+                <div class="search-warn">
+                        <div class="search-box">
+                            <div class="search-item">
+                                <img src="./image/war.png" alt="">
+                            </div>
+                            <div class="search-item">
+                                <span class="span-war"></span>
+                            </div>
+                        </div>
+                </div>
+                <div class="warn-title">
+                    <span>请确认</span>
+                    <span class="title-tips">"湖北省新冠肺炎疫情防控大培训"</span>
+                    <span>线上考试成绩是 否合格。</span>
+                </div>
+                <div class="warn-title1">
+                    <span>可在</span>
+                    <span class="title-tips">"湖北省新冠肺炎疫情防控大培训"</span>
+                    <span>平台中的</span>
+                    <span>"个人信息"</span>
+                    <span>查看</span>
                 </div>
             </div>
             <footer>4月21日后，“疫情防控知识大培训”线上培训考核合格的学员可申领培训合格证书。</footer>
        </div>
        <div class="right-asides">
         <div class="canvas_box" >
-            <canvas id="canvas1"width="498" height="682"></canvas>
+            <canvas id="canvas1" width="498" height="682"></canvas>
+        </div>
+        <div class="canvas-btn">
+            <button class="download" onclick="generateCanvas()">保存证书</button>
         </div>
     </div>
-    <button onclick="generateCanvas(1)">下载</button>
     </main>
-    <!-- <button onclick="generateCanvas(2)">打印</button> -->
 </body>
 </html>
 <script>
     var canvasShow = '';
      (function() {
-         
         var machineType = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop'
         if (machineType === 'Mobile')    {
-            console.log('移动端');
             $(".Desktop").css('display', 'none')
+            $(".right-asides").css("display",'none')
             var designW = 750; //设计稿宽
             var font_rate = 100;
             //适配
-            console.log(document.getElementsByTagName("html")[0])
             document.getElementsByTagName("html")[0].style.fontSize = document.body.offsetWidth / designW * font_rate + "px";
             document.getElementsByTagName("body")[0].style.fontSize = document.body.offsetWidth / designW * font_rate + "px";
             //监测窗口大小变化
@@ -104,12 +194,11 @@
             }, false);
 
         } else    {
-            console.log('Pc端',machineType);
             $(".Mobile").css('display', 'none')
-
+            $(".right-asides").css("display",'none')
             }
             $(".box-none").css('display', 'none')
-            creatDarw(machineType)
+            
     })();
     
 
@@ -120,54 +209,94 @@
         $("footer").css('display', 'block')　
     });
     //查询
-    function search (state) {
-        $(".box").css('display', 'none')
 
-            let name ,idCard = ''
-            if(state) {
-                name = $("input[name='data-name']").val()
-                idCard = $("input[name='data-card']").val()
-            } else {
-                name = $("input[name='data-nickName']").val()
-                idCard = $("input[name='data-idCard']").val()
-            }
+    function deletes() {
+        $(".id-card").val("")
+    }
+    //  creatDarw(true,'你号','420107199303302014')
+
+    function search (state) {
+        let name ,idCard = ''
+        if(state) {
+            name = $("input[name='data-name']").val()
+            idCard = $("input[name='data-card']").val()
+        } else {
+            name = $("input[name='data-nickName']").val()
+            idCard = $("input[name='data-idCard']").val()
+        }
+        let flag = false
+        if(!name) {
+            $(".span-text").html('请输入姓名')
+            $(".search-warn").css("display",'none')
+            $(".warning").css("display",'block')
+            $(".warn-title").css("display",'none')
+            $(".warn-title1").css("display",'none')
+
             
-            console.log(name)
-            console.log(idCard)
-            let flag = false
-            // if(!name) {
-            //     alert("请输入姓名")
-            //     flag = false
-            //     return
-            // }
-            if( !idCard) {
-                alert("请输入身份证号码")
+            flag = false
+            return
+        }
+        if( !idCard) {
+            $(".warning").css("display",'block')
+            $(".search-warn").css("display",'none')
+            $(".span-text").html('请输入身份证号码')
+            $(".warn-title").css("display",'none')
+            $(".warn-title1").css("display",'none')
+            return
+        } else {
+            if(!this.checkIDCard(idCard)) {
+            $(".warning").css("display",'block')
+            $(".search-warn").css("display",'none')
+            $(".span-text").html('身份证号格式错误')
+            $(".warn-title").css("display",'none')
+            $(".warn-title1").css("display",'none')
                 return
             } else {
-                if(!this.checkIDCard(idCard)) {
-                    alert("身份证号码不正确")
-                    return
+                flag = true
+            }
+        }
+        if(flag){
+            $(".warning").css("display",'none')
+            getAjax(name,idCard).then( res =>{
+                if (!res.data) {
+                     $(".span-war").html("没有查询到证书")
+                     $(".warn-title").css("display",'block')
+                     $(".search-warn").css("display",'block')  
                 } else {
-                    flag = true
+                    $(".right-asides").css("display",'block')
+                    $(".box").css('display', 'none')
+                    creatDarw(state,name,idCard)
                 }
-            }
-            if(flag){
-                getAjax(name,idCard).then( res =>{
-                    if (!res.data) {
-                        alert("没有查询到证书，请确认 '疫情防控知识大培训'线上培训考试成绩是否合格。 ")
-                    } else {
-                    }
-                }).catch(req =>{
-                    console.log(req)
-                    alert(req.data.value)
-                })
-            }
+            }).catch(req =>{
+                $(".warning").css("display",'none')
+                $(".search-warn").css("display",'block')
+                let war = '不匹配'
+                let war1 = '证书'
+                let index = req.data.value.indexOf(war)
+                let index1 = req.data.value.indexOf(war1)
+                if(index != -1) {
+                    $(".span-war").html('姓名和身份证号不匹配')
+                    $(".warn-title").css("display",'none')
+                    $(".warn-title1").css("display",'block')
+                } else if (index != -1) {
+                    $(".span-war").html('没有查询到证书')
+                    $(".warn-title").css("display",'block')
+                    $(".warn-title1").css("display",'none')
+                } else {
+                    $(".warn-title").css("display",'none')
+                    $(".warn-title1").css("display",'none')
+                    $(".warning").css("display",'block')
+                    $(".span-text").html(req.data.value)
+                    $(".search-warn").css("display",'none')
+                }      
+            })
+        }
     }
 
     function getAjax(name,idCard){
         let result = new Promise( ( res,req) =>{
             let  ajax = new XMLHttpRequest();
-            ajax.open('get', `https://kspx.hbwsrc.cn:8083/wxApplets/getStudyFinish?idCard=${idCard}`);
+            ajax.open('get', `https://kspx.hbwsrc.cn:8083/wxApplets/getStudyFinish?name=${name}&idCard=${idCard}`);
             ajax.send()
             ajax.onreadystatechange = function() {
                 let data = JSON.parse(ajax.response)
@@ -225,12 +354,22 @@
         // 返回验证结果，校验码和格式同时正确才算是合法的身份证号码
         return last === last_no && format ? true : false;
     }
-    function creatDarw(machineType,w=498,h=682) { //创建画板
-        canvasShow = machineType
+    function creatDarw(state,name,idCard,w=498,h=682) { //创建画板
+        if(state) {
+            canvasShow = 'Mobile'
+        } else {
+            canvasShow = 'Desktop'
+
+        }
+        console.log(canvasShow)
+        console.log(name)
+        console.log(idCard)
+
+
         let c1 = ''
         let  winWidth = ''
         let winHeight = ''
-        if( machineType == 'Desktop') {
+        if( canvasShow == 'Desktop') {
          c1 = document.querySelector('#canvas1')
          winWidth = 498
          winHeight = 682
@@ -241,31 +380,75 @@
          winHeight = canvas.height;
 
         }
-        let ctx = c1.getContext('2d')
-        // ctx.mozImageSmoothingEnabled = false;
-        // ctx.webkitImageSmoothingEnabled = false;
-        // ctx.msImageSmoothingEnabled = false;
-        // ctx.imageSmoothingEnabled = false
-        var type =['repeat']
-        var img = new Image();
-        img.src = "./certificate.jpg"
-    
         console.log(winWidth)
         console.log(winHeight)
 
-        img.onload = function() {
-            ctx.drawImage(img,0,0,winWidth,winHeight)
-            ctx.font = " normal bold 24px 微软雅黑";
-            // ctx.fillStyle = "#000";
-            ctx.fillText("张三",78,345);
-            ctx.font = "12px 微软雅黑";
-            ctx.fillText("2022　03　25",350,443);
-            ctx.fillStyle = ctx.createPattern(img, type[0])
-        }
+        let ctx = c1.getContext('2d')
+        let dpr = window.devicePixelRatio
+        let { width: cssWidth, height: cssHeight  } = canvas.getBoundingClientRect()
+        // canvas.style.width = winWidth + 'px';
+        // canvas.style.height = winHeight + 'px';
+        canvas.width = dpr * cssWidth;
+        canvas.height = dpr * cssHeight;
+        console.log(dpr)
+        ctx.scale(dpr,dpr);
+        // 设置颜色=
+        // 设置水平对齐方式
+        // ctx.textAlign = "center";
+        // 设置垂直对齐方式
+        // ctx.textBaseline = "middle";
+        // 绘制文字（参数：要写的字，x坐标，y坐标）
+  
+        
+        ctx.font = "20px bold 黑体";
+        ctx.textAlign = "center";
+        ctx.fillText("培训合格证明", 150, 110)
+        ctx.textAlign = "left";
+        ctx.font = "14px  微软雅黑";
+
+        ctx.fillText(name, 15, 160)
+        ctx.fillText(idCard, 155, 160)
+        ctx.font = "12px 微软雅黑";
+        ctx.fillText("_________同志，证件号码_____________________________，", 15, 160)
+        ctx.fillText("参加湖北省新型冠状病毒感染肺炎疫情防控指挥部组织的 ", 0, 190)
+        ctx.fillText("“疫情防控知识大培训”线上课程学习，经考核成绩合格，", 0, 220)
+        ctx.fillText("特发此证。", 0, 260)
+        ctx.textAlign = "end";
+
+        ctx.fillText("发证日期：2022年4月", 300, 290)
+
+
+              var gradient=ctx.createLinearGradient(0,0,c1.width,0)
+        gradient.addColorStop("0","magenta");
+        gradient.addColorStop("0.5","blue");
+        gradient.addColorStop("1.0","red");
+        gradient.addColorStop("1.0","red")
+     
+        ctx.textAlign = "center";
+              
+        ctx.fillStyle=gradient;
+        ctx.font = "18px 黑体";
+        ctx.fillText("湖北省新型冠状肺炎疫情防控指挥部", 150, 50)
+        ctx.fillStyle = '#fff'; 
+
+        // var type =['repeat']
+        // var img = new Image();
+        // img.src = "./certificate.jpg"
+        // img.onload = function() {
+        //     ctx.drawImage(img,0,0,winWidth,winHeight)
+        //     ctx.font = " normal bold 24px 微软雅黑";
+        //     ctx.fillStyle = "#000";
+        //     ctx.fillText('湖北省新型冠状肺炎疫情防控指挥部',0,345);
+
+        //     ctx.fillText(1111111111111,78,345);
+        //     ctx.fillText(idCard,90,345);
+        //     ctx.font = "40px 微软雅黑";
+        //     ctx.fillText("2022　03　25",350,443);
+        //     ctx.fillStyle = ctx.createPattern(img, type[0])
+        // }
     }
 
     function generateCanvas(num){
-        console.log(canvasShow)
         var contentWidth ,contentHeight ,target=""
         if( canvasShow == 'Desktop') {
         target = document.querySelector('#canvas1')
@@ -286,24 +469,22 @@
                 // img.src = require("./certificate.jpg")
 
                 //一页pdf显示html页面生成的canvas高度;
-                var pageHeight = contentWidth / 592.28 *841.89;
+                var pageHeight =  contentWidth / 592.28 * 841.89;
                 //未生成pdf的html页面高度
                 var leftHeight = contentHeight;
                 //页面偏移
                 var position = 0;
                 //a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
-                var imgWidth = 498;
-                var imgHeight = 682
+                var imgWidth = 595.28;
+                var imgHeight = 592.28/contentWidth * contentHeight
 
                 // var pageData = canvas.toDataURL('jpg', 1.0);
 
-                var pdf = new jsPDF('', 'pt', [498,682]);  
+                var pdf = new jsPDF('', 'pt','a4');  
 
                 //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
                 //当内容未超过pdf一页显示的范围，无需分页
                 if (leftHeight < pageHeight) {
-                    console.log(imgWidth)
-                    console.log(imgHeight)
                     pdf.addImage(canvas, 'jpg', 0, 0, imgWidth, imgHeight );
                 } else {
                     while(leftHeight > 0) {
@@ -316,19 +497,7 @@
                         }
                     }
                 }
-                // pdf.addPage();
-                if( num ==1 ) {
-                    console.log(canvas)
-
-                    pdf.save("证书.pdf");
-                } else {
-                    // window.print()
-                    // var win=window.open();
-                    // window.document.write(canvas);
-                    window.print();
-                    // window.location.reload()
-
-                }
+                pdf.save("证书.pdf");
             }
         })
     }
@@ -343,197 +512,3 @@
     // }
 
 </script>
-
-<style>
-    html,
-    body {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-    }
-    .Mobile {
-        width: 7.5rem;
-        height:100%;
-        margin: auto;
-        position: relative;
-    }
- 
-    .Mobile footer{
-        width: 7.5rem;
-        height: .67rem;
-        position: absolute;
-        bottom: 0.66rem;
-        font-size: 0.28rem;
-        color: #999999;
-        padding: 0 0.4rem;
-        box-sizing: border-box;
-
-    }
-
-    .Mobile input {
-        width: 5rem;
-        line-height: .5rem;
-    }
-
-    .Mobile .button-btn button {
-        width: 5rem;
-        height: 1rem;
-        background:#1D6BD6 ;
-        border: 1px solid #1D6BD6;
-        color: #fff;
-        font-size: .40rem;
-        border-radius: 25px;
-    }
-
-    .Mobile .box{
-        width: 7.5rem;
-        height: calc( 100% - 1.76rem);
-        position: relative;
-    }
-
-    .Mobile .box-none{
-        width: 7.5rem;
-        height: 4rem;
-        position: absolute;
-        margin: auto;
-        top: 0;left: 0;bottom: 0;right: 0;
-        text-align: center;
-        font-family: PingFang-SC-Regular;
-        background: #fff;
-    }
-
-    .Mobile .box-block{
-        width: 7.5rem;
-        height: 5rem;
-        position: absolute;
-        margin: auto;
-        top: 0;left: 0;bottom: 0;right: 0;
-        text-align: center;
-        font-family: PingFang-SC-Regular;
-        background: #ddd;
-    }
-
-    .Mobile .box-none-img{
-        width: 2.23rem;
-        height: 2.07rem;
-        margin: auto;
-    }
-
-    .Mobile .box-none span {
-        color: #333333;
-        font-size: 0.28rem;
-    }
-
-    .Mobile .box-none img {
-        width:100%;
-        height: 100%;
-    }
-      
-
-    .Mobile header{
-        width: 7.02rem;
-        height: 1.76rem;
-        margin: auto;
-        background-image: url(./image/haeder.png);
-        background-size:100%
-    }
-    /* .Desktop  */
-    .Mobile .right-asides{
-        background:#fff;
-        padding-top: 1rem;
-        box-sizing: border-box;
-        width: 100%;
-        height: 6.82rem;
-    }
-    .Mobile .canvas_box{
-        margin: auto;
-        width: 4.98rem;
-        height: 100%;
-    }
-    /* PC端 */
-       .Desktop {
-        width: 702px;
-        height:100%;
-        margin: auto;
-        position: relative;
-    }
-    .Desktop  footer {
-        width: 702px;
-        /* height: 67px; */
-        position: absolute;
-        bottom: 66px;
-        font-size:28px;
-        color: #999999;
-        padding: 40px;
-        box-sizing: border-box;
-    }
-    .Desktop .canvas_box{
-        margin: auto;
-        width: 498px;
-        height: 100%;
-    }
-    .Desktop input {
-        width: 500px;
-        line-height: 50px;
-    }
-    .Desktop .button-btn  {
-        margin-top: 50px;
-    }
-    .Desktop .button-btn button {
-        width: 500px;
-        height: 100px;
-        background:#1D6BD6 ;
-        border: 1px solid #1D6BD6;
-        color: #fff;
-        font-size: 40px;
-        border-radius: 25px;
-    }
-    .Desktop .box {
-        width:702px;
-        height: 870px;
-        position: relative;
-        margin-top:50px ;
-    }
-    .Desktop .box-none {
-        width: 702px;
-        height: 600px;
-        position: absolute;
-        margin: auto;
-        top: 0;left: 0;bottom: 0;right: 0;
-        text-align: center;
-        font-family: PingFang-SC-Regular;
-        background: #fff;
-    }
-    .Desktop .box-none-img {
-        width: 233px;
-        height: 207px;
-        margin: auto;
-    }
-    .Desktop  .box-block {
-        width: 702px;
-        height: 200px;
-        text-align: center;
-        font-family: PingFang-SC-Regular;
-        background: #ddd;
-        padding-top: 50px;
-    }
-    .Desktop  .box-block  div {
-        height: 100px;
-    }
-    .Desktop .box-none span {
-        color: #333333;
-        font-size:28px;
-    }
-    .Desktop  .box-none-img{
-        width: 223px;
-        height: 207px;
-        margin: auto;
-    }
-    .Desktop  header {
-        width: 702px;
-        height: 176px;
-        margin: auto;
-        background-image: url(./image/haeder.png);
-    }
-</style>
