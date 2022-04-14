@@ -73,7 +73,7 @@ input{
     position: relative;
     padding-top: 2.5rem;
     box-sizing: border-box;
-    /* display: none; */
+    display: none;
 }
 
 .Mobile .box-none{
@@ -214,8 +214,9 @@ input{
 }
 .Mobile .canvas_box{
     margin: auto;
-    width: 5.98rem;
+    width: 90%;
     height: 100%;
+    border: 1px solid #ddd;
 }
 /* PC端 */
    .Desktop {

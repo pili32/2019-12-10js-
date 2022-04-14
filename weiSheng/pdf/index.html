@@ -180,7 +180,7 @@
         var machineType = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop'
         if (machineType === 'Mobile')    {
             $(".Desktop").css('display', 'none')
-            $(".right-asides").css("display",'none')
+            // $(".right-asides").css("display",'none')
             var designW = 750; //设计稿宽
             var font_rate = 100;
             //适配
@@ -213,7 +213,7 @@
     function deletes() {
         $(".id-card").val("")
     }
-    //  creatDarw(true,'你号','420107199303302014')
+     creatDarw(true,'你号','420107199303302014')
 
     function search (state) {
         let name ,idCard = ''
@@ -402,20 +402,20 @@
         
         ctx.font = "20px bold 黑体";
         ctx.textAlign = "center";
-        ctx.fillText("培训合格证明", 150, 110)
+        ctx.fillText("培训合格证明", 200, 110)
         ctx.textAlign = "left";
         ctx.font = "14px  微软雅黑";
 
-        ctx.fillText(name, 15, 160)
-        ctx.fillText(idCard, 155, 160)
+        ctx.fillText(name, 20, 160)
+        ctx.fillText(idCard, 160, 160)
         ctx.font = "12px 微软雅黑";
-        ctx.fillText("_________同志，证件号码_____________________________，", 15, 160)
-        ctx.fillText("参加湖北省新型冠状病毒感染肺炎疫情防控指挥部组织的 ", 0, 190)
-        ctx.fillText("“疫情防控知识大培训”线上课程学习，经考核成绩合格，", 0, 220)
-        ctx.fillText("特发此证。", 0, 260)
+        ctx.fillText("_________同志，证件号码_______________________________，", 20, 160)
+        ctx.fillText("参加湖北省新型冠状病毒感染肺炎疫情防控指挥部组织的 ", 20, 190)
+        ctx.fillText("“疫情防控知识大培训”线上课程学习，经考核成绩合格，", 20, 220)
+        ctx.fillText("特发此证。", 20, 260)
         ctx.textAlign = "end";
 
-        ctx.fillText("发证日期：2022年4月", 300, 290)
+        ctx.fillText("发证日期：2022年4月", 320, 290)
 
 
               var gradient=ctx.createLinearGradient(0,0,c1.width,0)
@@ -428,7 +428,7 @@
               
         ctx.fillStyle=gradient;
         ctx.font = "18px 黑体";
-        ctx.fillText("湖北省新型冠状肺炎疫情防控指挥部", 150, 50)
+        ctx.fillText("湖北省新型冠状肺炎疫情防控指挥部", 170, 50)
         ctx.fillStyle = '#fff'; 
 
         // var type =['repeat']

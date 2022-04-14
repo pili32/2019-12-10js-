@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+
+    let obj = {
+        name:1,
+        age:2 ,
+        type:3 
+    }
+//     let arr = []
+//     for( key in obj ) {
+//         arr.push(obj[key])
+//     }
+
+//     let obj1 = obj
+
+// console.log(arr)
+// obj1.age = "111"
+// console.log(obj)
+// console.log(obj1)
+
+let obj1 = Object.assign({},obj)
+obj1.name = 3
+console.log(obj1)
+console.log(obj)
+
+//多维数组转平坦数组
+// let name = [0,2,1,[2,2,[5,2]]]
+// let name1 = name.flat(Infinity)
+// console.log(name1)
+
+// let name1  = name.toString().split(",").map( item => Number(item))
+// console.log(name1)
+
+//合并数组
+let name2 = [1,5,8,5,8,]
+let name3 = [1,5,8,5,8,9,9,9]
+// let name4 = name2.concat(name3)
+// console.log(name4)
+
+// for( var i in name2) {
+//     name3.push(name2[i])
+// }
+name4 = name2.push.apply(name2,name3)
+console.log(name2.push.apply(name3))
+
+</script>
+</html>
