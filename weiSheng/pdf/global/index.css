@@ -11,10 +11,21 @@ body {
     margin: auto;
     position: relative;
 }
-.Mobile .canvas-btn{
+ .canvas-btn{
     width: 100%;
     text-align: center;
 }
+.download{
+    background: #006CF1;
+    border: #006CF1;
+    color: #fff;
+    border: 1px solid #1D6BD6;
+    color: #fff;
+    /* font-size: .40rem; */
+    /* border-radius: .1rem; */
+    outline: none
+}
+
 .Mobile footer{
     width: 7.5rem;
     height: .67rem;
@@ -73,7 +84,7 @@ input{
     position: relative;
     padding-top: 2.5rem;
     box-sizing: border-box;
-    display: none;
+    /* display: none; */
 }
 
 .Mobile .box-none{
@@ -200,7 +211,7 @@ input{
 /* .Desktop  */
 .Mobile .right-asides{
     background:#fff;
-    padding-top: 1rem;
+    /* padding-top: 1rem; */
     box-sizing: border-box;
     width: 100%;
     height: 7.82rem;
@@ -216,7 +227,6 @@ input{
     margin: auto;
     width: 90%;
     height: 100%;
-    border: 1px solid #ddd;
 }
 /* PC端 */
    .Desktop {
@@ -261,6 +271,10 @@ input{
     margin: auto;
     width: 498px;
     height: 100%;
+}
+canvas {
+    padding-top: 20px;
+    box-sizing: border-box;
 }
 .Desktop input {
     width: 500px;
