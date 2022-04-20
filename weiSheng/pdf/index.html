@@ -89,7 +89,7 @@
                 <canvas id="canvas" style="background:#fff;width:100%;height:100%"></canvas>
             </div>
             <div class="canvas-btn">
-                <button class="download" onclick="generateCanvas()">保存证书</button>
+                <button class="download" id="savePdf"  onclick="generateCanvas()">保存证书</button>
             </div>
         </div>
 
@@ -168,25 +168,30 @@
             <canvas id="canvas1" width="498" height="682"></canvas>
         </div>
         <div class="canvas-btn">
-            <button class="download" onclick="generateCanvas()">保存证书</button>
+            <button class="download" id="savePdf"  onclick="generateCanvas()" >保存证书</button>
+
         </div>
     </div>
     </main>
 </body>
 </html>
 <script>
-    function downloaded(){
-        var ua = navigator.userAgent.toLowerCase();
-        if(ua.match(/MicroMessenger/i)=="micromessenger") {
-            alert("请点击右上角，选择浏览器中打开");
-            $("main").css('display','none')
-        } else {
+    // function downloaded(){
+    //     var ua = navigator.userAgent.toLowerCase();
+    //     if(ua.match(/MicroMessenger/i)=="micromessenger") {
+    //         alert("请点击右上角，选择浏览器中打开");
+    //         $("main").css('display','none')
+    //     } else {
            
-        }
-    }
-    downloaded()
+    //     }
+    // }
+    // downloaded()
     var canvasShow = '';
+    var name = '';
+    var idCard = '';
     var date = '';
+
+
 
 
 
@@ -210,6 +215,8 @@
         } else    {
             $(".Mobile").css('display', 'none')
             $(".right-asides").css("display",'none')
+            $("#canvas").css("display",'none')
+
             }
             $(".box-none").css('display', 'none')
             
@@ -230,7 +237,6 @@
     //  creatDarw(true,'你号','420107199303302014')
 
     function search (state) {
-        let name ,idCard = ''
         if(state) {
             name = $("input[name='data-name']").val()
             idCard = $("input[name='data-card']").val()
@@ -239,6 +245,9 @@
             idCard = $("input[name='data-idCard']").val()
         }
         let flag = false
+        console.log(name)
+        console.log(idCard)
+
         if(!name) {
             $(".span-text").html('请输入姓名')
             $(".search-warn").css("display",'none')
@@ -450,56 +459,102 @@
         }
     }
 
-
-    function generateCanvas(){
-        var contentWidth ,contentHeight ,target=""
-        if( canvasShow == 'Desktop') {
-            canvas = document.querySelector('#canvas1')
-        } else {
-            canvas = document.querySelector('#canvas')
-        }
-        let scale = window.devicePixelRatio * 2
-        html2canvas(canvas,   { //添加dom元素
-            // width:  1020,
-            // height:850,
-            x:0,
-            y:0,
-            dpi: 450,   //将分辨率提高到特定的DPI 
-            foreignObjectRendering: true,   //如果浏览器支持，是否使用 ForeignObject 渲染
-            useCORS: true,  //是否尝试使用 CORS 从服务器加载图像
-            background: "#ffffff",
-            async: false,  //用于渲染的比例。默认为浏览器设备像素比
-            onrendered:function(canvas) {
-                var canvasWidth = canvas.width  / scale
-                var canvasHeight = canvas.height  / scale
-                let pageWidth =  595.28
-                let pageHeight = 592.28 / canvasWidth * canvasHeight;
-                //一页pdf显示html页面生成的canvas高度;
-                // var pageHeight =  contentWidth / 592.28 * 841.89;
-                //页面偏移
-                var position = 0;
-                //a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
-                var jpeg = canvas.toDataURL('jpg', 1.0);
-                var pdf = new jsPDF('', 'pt', 'a4');  
-                //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
-                //当内容未超过pdf一页显示的范围，无需分页
-                if (canvasHeight < pageHeight) {
-                    pdf.addImage(jpeg, 'jpg', 0, 0, pageWidth, pageHeight );
-                } else {
-                    while(canvasHeight > 0) {
-                        pdf.addImage(jpeg, 'jpg', 0, position, pageWidth, pageHeight)
-                        canvasHeight -= pageHeight;
-                        position -=a4Height;
-                        //避免添加空白页
-                        if(canvasHeight > 0) {
-                            pdf.addPage();
-                        }
-                    }
-                }
-           
-                pdf.save("证书.pdf");
+    function generateCanvas() {
+        const canvas = document.getElementById("canvas1");
+            const ctx = canvas.getContext("2d");
+            console.log(canvas)
+            // 文件选择
+            const image = new Image();
+            image.src = './image/certificate1.jpg';
+            image.onload = function(event) {
+                console.log(image.src);
+                URL.revokeObjectURL(this.src);
+                canvas.width = image.width;
+                canvas.height = image.height;
+                ctx.drawImage(image,0, 0)
+                ctx.font = "35px 仿宋";
+                ctx.fillText(name, 360, 365);
+                ctx.fillText(idCard, 790, 365);
+                ctx.fillText(date, 940, 770);
             }
-        })
+
+            // 保存打印
+            let Dom = document.getElementById("savePdf");
+            Dom.addEventListener("click", function() {
+                var u = navigator.userAgent, app = navigator.appVersion
+                let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;
+                //ios终端;
+                // let isiOS = !!u.match(/(i[^;]+;( U;)? CPU.+Mac OS X/);
+                if (isAndroid) {
+                    let ImageData = canvas.toDataURL('image/png');
+                    var doc = new jsPDF();
+                    doc.addImage(ImageData, 'JPEG', 15, 40, 180, 140);
+                    doc.save("证书.pdf");
+                } else {
+                    var a = document.createElement("a")
+                    a.href = canvas.toDataURL()
+                    a.download = "证书"
+                    a.click()
+                    $("a").remove()
+                    console.log(a)
+                    // return 'ios'
+                }
+
+               
+            });
     }
+        // window.onload =() => {
+   
+            
+        
+        // var contentWidth ,contentHeight ,target=""
+        // if( canvasShow == 'Desktop') {
+        //     canvas = document.querySelector('#canvas1')
+        // } else {
+        //     canvas = document.querySelector('#canvas')
+        // }
+        // let scale = window.devicePixelRatio * 2
+        // html2canvas(canvas,   { //添加dom元素
+        //     // width:  1020,
+        //     // height:850,
+        //     x:0,
+        //     y:0,
+        //     dpi: 450,   //将分辨率提高到特定的DPI 
+        //     foreignObjectRendering: true,   //如果浏览器支持，是否使用 ForeignObject 渲染
+        //     useCORS: true,  //是否尝试使用 CORS 从服务器加载图像
+        //     background: "#ffffff",
+        //     async: false,  //用于渲染的比例。默认为浏览器设备像素比
+        //     onrendered:function(canvas) {
+        //         var canvasWidth = canvas.width  / scale
+        //         var canvasHeight = canvas.height  / scale
+        //         let pageWidth =  595.28
+        //         let pageHeight = 592.28 / canvasWidth * canvasHeight;
+        //         //一页pdf显示html页面生成的canvas高度;
+        //         // var pageHeight =  contentWidth / 592.28 * 841.89;
+        //         //页面偏移
+        //         var position = 0;
+        //         //a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
+        //         var jpeg = canvas.toDataURL('jpg', 1.0);
+        //         var pdf = new jsPDF('', 'pt', 'a4');  
+        //         //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
+        //         //当内容未超过pdf一页显示的范围，无需分页
+        //         if (canvasHeight < pageHeight) {
+        //             pdf.addImage(jpeg, 'jpg', 0, 0, pageWidth, pageHeight );
+        //         } else {
+        //             while(canvasHeight > 0) {
+        //                 pdf.addImage(jpeg, 'jpg', 0, position, pageWidth, pageHeight)
+        //                 canvasHeight -= pageHeight;
+        //                 position -=a4Height;
+        //                 //避免添加空白页
+        //                 if(canvasHeight > 0) {
+        //                     pdf.addPage();
+        //                 }
+        //             }
+        //         }
+           
+        //         pdf.save("证书.pdf");
+        //     }
+        // })
+    // }
 
 </script>

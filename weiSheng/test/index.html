@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片转pdf</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .canvas-imgs{
+            padding: 20x 0;
+        }
+        #canvas{
+            width: 100%;
+            border-width: 1px;
+            border-color: #000000;
+            border-style: solid;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="canvas-imgs">
+        <canvas id="canvas"></canvas>
+    </div>
+    <div>
+        <button id="savePdf">保存pdf</button>
+    </div>
+    <script src="./js/jspdf.js"></script>
+    <script>
+        window.onload =() => {
+            const canvas = document.getElementById("canvas");
+            const ctx = canvas.getContext("2d");
+            // 文件选择
+            const image = new Image();
+            image.src = './image/certificate1.jpg';
+            image.onload = function(event) {
+                console.log(image.src);
+                URL.revokeObjectURL(this.src);
+                canvas.width = image.width;
+                canvas.height = image.height;
+                ctx.drawImage(image,0, 0)
+                ctx.font = "40px Arial";
+                ctx.fillText("张三", 360, 360);
+            }
+            // 保存打印
+            let Dom = document.getElementById("savePdf");
+            Dom.addEventListener("click", function() {
+                // var image = new Image();
+                // image.src = canvas.toDataURL("image/png");
+                let ImageData = canvas.toDataURL('image/png');
+                var doc = new jsPDF();
+                doc.addImage(ImageData, 'JPEG', 15, 40, 180, 180);
+                doc.save("证书.pdf");
+            });
+        }
+        
+    </script>
+</body>
+</html>
