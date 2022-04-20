@@ -186,6 +186,10 @@
     }
     downloaded()
     var canvasShow = '';
+    var date = '';
+
+
+
      (function() {
         var machineType = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop'
         if (machineType === 'Mobile')    {
@@ -254,7 +258,6 @@
             $(".warn-title1").css("display",'none')
             return
         } else {
-            console.log(idCard.length)
             if(idCard.length === 18) {
                 if(!this.checkIDCard(idCard)) {
                 $(".warning").css("display",'block')
@@ -282,6 +285,7 @@
                     $(".right-asides").css("display",'block')
                     $(".box").css('display', 'none')
                     creatDarw(state,name,idCard)
+                    date = res.data
                 }
             }).catch(req =>{
                 $(".warning").css("display",'none')
@@ -396,8 +400,6 @@
          c1 = document.querySelector('#canvas')
           winWidth = canvas.width;
          winHeight = canvas.height;
-         console.log(winWidth)
-         
          canvasShowImage(c1,name,idCard,winWidth,winHeight)
 
         }
@@ -420,21 +422,6 @@
                 screen.style.padding = '10px';
             }
         }
-    function getNowFormatDate() {
-        var date = new Date();
-        var seperator1 = "-";
-        var year = date.getFullYear();
-        var month = date.getMonth() + 1;
-        var strDate = date.getDate();
-        if (month >= 1 && month <= 9) {
-            month = "0" + month;
-        }
-        if (strDate >= 0 && strDate <= 9) {
-            strDate = "0" + strDate;
-        }
-        var currentdate = year + seperator1 + month + seperator1 + strDate;
-        return currentdate;
-    }
     function canvasShowImage(c1,name,idCard,winWidth,winHeight){
         let ctx = c1.getContext('2d')
         let dpr = window.devicePixelRatio
@@ -444,25 +431,14 @@
         const pdfWidth =  cssWidth
         const pdfHieght = cssHeight
         ctx.scale(dpr,dpr);
-        console.log(pdfWidth)
-        console.log(pdfHieght)
-
         const scale = 300*dpr * cssHeight
         var type =['repeat']
         var img = new Image();
         img.src = "./image/certificate1.jpg"
         img.crossOrigin = "anonymous";
-        let date = getNowFormatDate()
         img.onload = function() {
             let imgW = img.width
             let imgH = img.height
-            console.log(imgW)
-            console.log(imgH)
-            console.log(winWidth)
-
-            console.log(imgH*winWidth/imgW)
-
-
             ctx.drawImage(img,0,0,705/2,498/2)
             // ctx.drawImage(this,0,0,winWidth,imgH*winWidth/imgW)
 
@@ -494,17 +470,10 @@
             background: "#ffffff",
             async: false,  //用于渲染的比例。默认为浏览器设备像素比
             onrendered:function(canvas) {
-                console.log(canvas)
                 var canvasWidth = canvas.width  / scale
                 var canvasHeight = canvas.height  / scale
-                console.log(canvas.width)
-                console.log(canvas.height)
-
                 let pageWidth =  595.28
                 let pageHeight = 592.28 / canvasWidth * canvasHeight;
-                console.log(pageWidth)
-                console.log(pageHeight)
-
                 //一页pdf显示html页面生成的canvas高度;
                 // var pageHeight =  contentWidth / 592.28 * 841.89;
                 //页面偏移
