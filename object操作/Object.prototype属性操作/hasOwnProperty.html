@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+
+    /**
+     * Object.prototype.hasOwnProperty()方法用户判断参数是否时指定对象的自由属性或方法
+     * 语法 obj.hasOwnProperty(prop)
+     * 
+    */
+
+   var obj ={
+       a:1,
+       b:2,
+       c:e => e+1,
+   }
+   obj.hasOwnProperty('d')
+   console.log(obj.hasOwnProperty('d')) // false  不存在这个属性
+   console.log(obj.hasOwnProperty('a')) // true  
+   console.log(obj.hasOwnProperty('c')) // true  
+
+   
+   console.log(Object.prototype.hasOwnProperty.call(obj,'a')) // true  
+
+
+   console.log()
+
+
+</script>

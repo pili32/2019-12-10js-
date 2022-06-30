@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+
+<script>
+    // ||  全部为假就找后面
+    // const a = 0 || '张三'
+    // const b = false || '张三'
+    // const c = null || '张三'
+    // const d = undefined || '张三'
+    // const e = '' || '张三'
+    // console.log(a)
+    // console.log(b)
+    // console.log(c)
+    // console.log(d)
+    // console.log(e)
+
+    // ??  空位运算符只会把null 和undefiend当成假值
+    // const a = 0 ?? '张三'
+    // const b = false ?? '张三'
+    // const c = null ?? '张三'
+    // const d = undefined ?? '张三'
+    // const e = '' ?? '张三'
+    // console.log(a)  //0
+    // console.log(b)  //false
+    // console.log(c)  //'张三'
+    // console.log(d)  //'张三'
+    // console.log(e)  // ''
+
+    const obj ={
+        name:'ss',
+        age:'99',
+        dog:'ff'
+    }
+    // getOwnPropertyNames 写法1   keys写法2
+    //let arrKey = Object.getOwnPropertyNames(obj)
+    let arrKey = Object.keys(obj)
+
+    console.log(arrKey)  //['name', 'age', 'dog']
+
+    for(let key of arrKey) {
+        console.log(obj[key])  //ss 99 ff
+    }
+
+    for( let key in obj) {
+        console.log(obj[key])  //ss 99 ff
+
+    }
+
+
+</script>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+/**
+ * Object.assign  用途用来合并对象值，当key相同时，后面的value会替换掉前面的value
+ * Object.assign  属于对对象进行浅拷贝,只会拷贝对象本身的属性，不会拷贝继承属性，也不会拷贝不可枚举的属性
+ * target  目标对象
+ * sourcess 源对象
+ * object.assign(target,sourcess)
+ * 
+*/
+let obj ={
+    a:1,
+    b:2,
+    c:3
+}
+let obj1 ={
+    c:2,
+    d:1,
+    f:2
+}
+
+// 此方法目标对象的值也会改变
+const obj2 = Object.assign(obj,obj1)   
+console.log(obj2)  //{a: 1, b: 2, c: 2, d: 1, f: 2}  
+console.log(obj)  //{a: 1, b: 2, c: 2, d: 1, f: 2}
+
+// 当target为空对象时,值其他值不会改变
+const obj3 = Object.assign({},obj1)
+console.log(obj3) //{a: 1, b: 2, c: 2, d: 1, f: 2}
+console.log(obj1) //{c: 2, d: 1, f: 2}
+
+
+
+// 也可对Array进行操作,会将枚举的值替换掉
+let arr = [0,1,2,7,5,6]
+let arr1 = [4,2,5]
+let arr2 = Object.assign(arr,arr1)
+console.log(arr2) //[4, 2, 5, 7, 5, 6]
+console.log(arr)   //[4, 2, 5, 7, 5, 6]
+
+// let arr4  = obj
+</script>

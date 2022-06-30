@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+    let list =[5]
+    if(list?.length) console.log(list.length)   //?  可选链  判断list存在，存在就找list.length   打印为1
+
+    let first = list?.[0]  //?  可选链  判断list存在，存在就找list下标0   
+    console.log(first)   //5  
+
+    const obj ={
+        name:'11',
+        age:{
+            siz:'9',
+            
+        }
+    }
+    let name = obj?.age?.siz   //一层一层找,obj存在就找obj下面的age,如果age存在就找下面的siz,找得到就是返回对应的值，找不到就返回undefined
+    console.log(name)
+
+
+</script>

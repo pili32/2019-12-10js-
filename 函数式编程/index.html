@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+
+<script>
+    // const add = (x,y) {
+    //     function(z){
+    //         return x+y+z
+    //     }
+    // }
+    // 函数式变成，极大的
+//     const add2 = function(x,y){
+//        return function(z){
+//             return x+y+z
+//         }
+//     }
+//    const add = add2(1,2)(3)   //x:1 y:2 z:3
+
+   var compose = function(f,g) {
+    //    console.log("==============")
+    //    console.log(f)
+       // f 为mul5函数
+       // g 为add1函数
+    //    console.log(f)
+    //    console.log(g)
+
+       return function (x){
+    //    console.log(x,'---------')
+
+           return f(g(x))
+       }
+   }
+//    var add1 = x => x+1
+//    var mul5 = x => x*5
+    var add1 = function(m) {
+        // console.log(m,'add1')
+        return m+1
+    }
+    var mul5 = function(m) {
+        // console.log(m,'mul5')
+
+        return m*5
+    }
+   compose(mul5,add1)(2)
+//    console.log(compose(mul5,add1)(2))   //15
+
+//    var compose = (x,y) => x(y+1)
+    // function add(z) {
+    //     return 
+    // }
+//    let first = arr => arr[0]
+//    let reverse = arr => arr.reverse()
+//    var last = compose(first,reverse)
+//    last([1,2,3,4,5])
+//    console.log(last([1,2,3,4,5]))
+    // console.log(add1)   //6
+
+    // var compose = (x,y) => x(y+1)
+    // function add(z) {
+    //     return 
+    // }
+    // compose( add(),1)
+    // console.log(compose( add,1))
+
+
+    // function flattern (array) {
+    //     // debugger
+    //     console.log(array,'-------------------')
+    //     if(!Array.isArray(array) ) {
+    //         console.log(array,'++++++++++====')
+    //         return array;
+    //     }
+    //     return ([].concat(...array.map(flattern)))
+    // }
+    // let result =flattern([1,2,3,[4,5,[6]]])
+    // let result1  = new Set([1,2,3,[4,5,[6]]])
+    // console.log(result)
+    // console.log(result1)
+
+
+    function flattern(array){
+        console.log(array,'*********888')
+        let arr1 = []
+        arr1.concat(
+            array.map(item => {
+            if(!Array.isArray(item)) {
+                console.log(item,'+++++++++++++')
+                return item
+            } else {
+                console.log(item,'array')
+                flattern(item)
+            }
+            })
+        )
+       
+      
+       console.log(arr,'--------------')
+       return  ([].concat(arr))
+
+    }
+    let result =flattern([1,2,3,[4,5,[6]]])
+    console.log(result)
+
+
+</script>

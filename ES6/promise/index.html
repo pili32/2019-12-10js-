@@ -237,6 +237,19 @@
         // })
 
     //现在来看.then可以一直接收，但是.catch不可以
+    // Promise.all 接受一个数组中多个接口调用,返回一个数组里面包含返回的内容
+
+   /**
+     * @returns res :[
+            {code: 0, msg: '操作成功', data: {…}, success: true},
+            {code: 0, msg: '操作成功', data: {…}, success: true}
+            ]
+     * 4
+     */
+    
+    Promise.all([one,two]).then( res =>{
+        let [one,two] = res 
+    })
 </script>
 
 </html>
